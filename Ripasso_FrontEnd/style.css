@@ -10,6 +10,16 @@
 .container {
     text-align: center;
 }
+table {
+  border: 3px solid;
+}
+th, td {
+  padding: 8px;
+  border: 1px solid;
+}
+footer{
+    background-color: gray;
+}
 #logo{
   padding: 20px;
     height: 50%;
