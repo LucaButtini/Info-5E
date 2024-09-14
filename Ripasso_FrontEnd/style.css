@@ -1,17 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+* {
+    font-family: "Poppins", sans-serif;
+}
+
 .navbar {
     display: flex;
     background-color: black;
 }
 .navbar a {
+    text-align: center;
     color: white;
     padding: 10px 10px;
     text-decoration: none;
+}
+.navbar a:hover {
+    background-color: #ddd;
+    color: black;
 }
 .container {
     text-align: center;
 }
 table {
   border: 4px solid black;
+  width:100%;
 }
 th {
   color: red;
