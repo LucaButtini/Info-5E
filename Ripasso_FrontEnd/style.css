@@ -4,6 +4,9 @@
     font-family: "Poppins", sans-serif;
 }
 
+body {
+  margin:0; 
+}
 .navbar {
     display: flex;
     background-color: black;
@@ -27,7 +30,7 @@ table {
 }
 th {
   color: red;
-  bakground-color: green;
+  background-color: green;
   padding: 8px;
   border: 2px solid black;
 }
