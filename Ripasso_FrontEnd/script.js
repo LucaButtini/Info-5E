@@ -1,8 +1,3 @@
-let user = {
-    name: "",
-    password: "",
-};
-
 let regLink = document.querySelector('#account');
 regLink.addEventListener("click", function () {
 
@@ -48,4 +43,8 @@ regLink.addEventListener("click", function () {
     form.appendChild(pass);
     form.appendChild(finestra.document.createElement("br"));
     form.appendChild(submit);
+    let script2 = finestra.document.createElement("script");
+    script2.src = "script2.js";
+    finestra.document.body.appendChild("script");
 });
+document.querySelector("#p-login").textContent = localStorage.getItem("username") + "---" + localStorage.getItem("password");
