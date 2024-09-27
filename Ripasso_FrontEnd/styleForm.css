@@ -26,8 +26,7 @@ input[type="password"] {
     color: #fff;
     padding: 10px;
     border: none;
-    border-radius: 5px;
-    cursor: grabbing;
+    border-radius: 5px;   
 }
 
 .login:hover {
