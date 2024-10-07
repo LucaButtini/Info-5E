@@ -9,3 +9,7 @@ where p.famiglia <>"";
 update db_amazon.prodotti p
 set p.famiglia = null 
 where p.famiglia ="";
+
+select p.famiglia, p.marca
+from db_amazon.prodotti p 
+where p.famiglia is null;
