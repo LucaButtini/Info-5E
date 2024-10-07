@@ -44,6 +44,8 @@ set p.descrizione = trim(p.descrizione); -- toglie gli spazi
 update db_amazon.prodotti
 set descrizione = trim(descrizione);*/
 
--- visualizzo tutte le marche della tabella 
-select distinct marca 
+-- visualizzo l'attributo che voglio della tabella senza duplicati
+select distinct descrizione 
 from db_amazon.prodotti;
+
+drop database db_amazon;
