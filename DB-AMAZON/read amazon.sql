@@ -38,3 +38,12 @@ where p.descrizione like "q%" and p.marca  like "T%";
 -- aggiornare il campo descrizione eliminando tutti gli spazi
 update db_amazon.prodotti p
 set p.descrizione = trim(p.descrizione); -- toglie gli spazi 
+
+
+/*-- aggiorniamo il solo col nome dell'attributo
+update db_amazon.prodotti
+set descrizione = trim(descrizione);*/
+
+-- visualizzo tutte le marche della tabella 
+select distinct marca 
+from db_amazon.prodotti;
