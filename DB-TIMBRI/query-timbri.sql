@@ -42,15 +42,32 @@ from mydb.test t
 order by datediff(now(), t.data_assunzione) asc;
 
 -- calcolo anni mesi giorni trascorsi dall'assunzione
-select distinct t.codice_fiscale, t.nome, t.cognome, t.fascia_stipendio, t.data_assunzione, 
-datediff(now(), t.data_assunzione) as giorni_servizio, 
-datediff(now(), t.data_assunzione) / 365 as anni_decimali, 
-datediff(now(), t.data_assunzione) div 365 as anni, 
-datediff(now(), t.data_assunzione) mod 365 as giorni_restanti, 
-datediff(now(), t.data_assunzione) mod 365 div 30 as mesi,
-datediff(now(), t.data_assunzione) mod 365 mod 30 as giorni
-from mydb.test t
-order by datediff(now(), t.data_assunzione) desc;
+-- 
+-- Seleziona solo righe uniche (elimina i duplicati)
+SELECT DISTINCT 
+    t.codice_fiscale,                -- Codice fiscale del dipendente
+    t.nome,                          -- Nome del dipendente
+    t.cognome,                       -- Cognome del dipendente
+    t.fascia_stipendio,              -- Fascia di stipendio del dipendente
+    t.data_assunzione,               -- Data di assunzione del dipendente
+    -- Calcola i giorni totali di servizio dalla data di assunzione fino ad oggi
+    DATEDIFF(NOW(), t.data_assunzione) AS giorni_servizio,
+    -- Calcola gli anni di servizio come valore decimale (approssimativo)
+    DATEDIFF(NOW(), t.data_assunzione) / 365 AS anni_decimali,
+    -- Calcola gli anni interi di servizio (senza decimali)
+    DATEDIFF(NOW(), t.data_assunzione) DIV 365 AS anni,
+    -- Calcola i giorni restanti dopo aver sottratto gli anni completi
+    DATEDIFF(NOW(), t.data_assunzione) MOD 365 AS giorni_restanti,
+    -- Calcola i mesi completi nei giorni rimanenti, assumendo ogni mese ha circa 30 giorni
+    DATEDIFF(NOW(), t.data_assunzione) MOD 365 DIV 30 AS mesi,
+    -- Calcola i giorni rimanenti dopo aver sottratto sia gli anni sia i mesi completi
+    DATEDIFF(NOW(), t.data_assunzione) MOD 365 MOD 30 AS giorni
+FROM 
+    mydb.test t  -- Nome della tabella contenente i dati dei dipendenti
+-- Ordina i risultati in ordine decrescente di giorni di servizio, mostrando prima i dipendenti con più anni di servizio
+ORDER BY 
+    DATEDIFF(NOW(), t.data_assunzione) DESC;
+   
 
 -- cambiamo il formato della data 
 -- date_format
@@ -69,7 +86,10 @@ from mydb.test t;
 -- calcolare le ore di lavoro
 -- DA RISOLVERE         
 -- help --> secondi lavorati                   
-select t.codice_fiscale, datediff(t.uscita, t.ingresso)  
+/*select t.codice_fiscale, datediff(t.uscita, t.ingresso)  
+from mydb.test t;*/
+-- second è l'unità di misura
+select t.codice_fiscale, TIMESTAMPDIFF(second , t.ingresso, t.uscita) as secondi_lavorati
 from mydb.test t;
 
 -- copiare le tuple del comando select su una nuova tabella
