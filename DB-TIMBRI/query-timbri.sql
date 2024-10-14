@@ -42,8 +42,6 @@ from mydb.test t
 order by datediff(now(), t.data_assunzione) asc;
 
 -- calcolo anni mesi giorni trascorsi dall'assunzione
--- 
--- Seleziona solo righe uniche (elimina i duplicati)
 SELECT DISTINCT 
     t.codice_fiscale,                -- Codice fiscale del dipendente
     t.nome,                          -- Nome del dipendente
@@ -67,15 +65,14 @@ FROM
 -- Ordina i risultati in ordine decrescente di giorni di servizio, mostrando prima i dipendenti con più anni di servizio
 ORDER BY 
     DATEDIFF(NOW(), t.data_assunzione) DESC;
-   
 
 -- cambiamo il formato della data 
 -- date_format
 select distinct t.codice_fiscale, t.nome, t.cognome, t.fascia_stipendio, date_format(t.data_assunzione, '%d %M %Y') 
 from mydb.test t;
 
--- oppure con la D maiuscola per formato simile
-select distinct t.codice_fiscale, t.nome, t.cognome, t.fascia_stipendio, date_format(t.data_assunzione, '%D %M %Y') 
+-- oppure con la D maiuscola per formato esteso
+select distinct t.codice_fiscale, t.nome, t.cognome, t.fascia_stipendio, date_format(t.data_assunzione, '%D %M %Y')
 from mydb.test t;
 
 
@@ -83,8 +80,7 @@ from mydb.test t;
 select t.codice_fiscale, t.ingresso, t.uscita 
 from mydb.test t;
 
--- calcolare le ore di lavoro
--- DA RISOLVERE         
+-- mia opzione ore lavorative
 -- help --> secondi lavorati                   
 /*select t.codice_fiscale, datediff(t.uscita, t.ingresso)  
 from mydb.test t;*/
@@ -92,6 +88,79 @@ from mydb.test t;*/
 select t.codice_fiscale, TIMESTAMPDIFF(second , t.ingresso, t.uscita) as secondi_lavorati
 from mydb.test t;
 
+-- orario di uscita e entrata associato al codice fiscale
+select t.codice_fiscale, t.ingresso, t.uscita
+from mydb.test t ;
+
+-- versione fatta in classe
+-- quanto tempo è trascorso fra ingresso e uscita 
+-- datefiff() non va bene perchè restituisce i giorni
+select t.codice_fiscale, t.ingresso, t.uscita,
+datediff(t.uscita, t.ingresso) as tempo_lavortivo 
+from mydb.test t ;
+
+-- abbiamo bisogno dei secondi trascorsi con la funzione unix_timestamp()
+-- calcolo dei secondi trascorsi e guadagno maggiore
+select t.codice_fiscale ,
+unix_timestamp(t.uscita) - unix_timestamp(t.ingresso) as secondi_totali,
+(unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))div 3600 as ore_totali,
+(unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))mod 3600 mod 60 as minuti_totali,
+((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))div 3600) * 12 + ((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))mod 3600 mod 60) * (12/60) as guadagno_orario
+from mydb.test t
+order by ((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))div 3600) * 12 + ((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))mod 3600 mod 60) * (12/60) desc;
+
+
+-- visualizzo solo n tuple, con la clausola LIMIT
+select t.codice_fiscale ,
+unix_timestamp(t.uscita) - unix_timestamp(t.ingresso) as secondi_totali,
+(unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))div 3600 as ore_totali,
+(unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))mod 3600 mod 60 as mintui_totali,
+((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))div 3600) * 12 + ((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))mod 3600 mod 60) * (12/60) as guadagno_orario
+from mydb.test t
+order by ((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))div 3600) * 12 + ((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))mod 3600 mod 60) * (12/60) desc
+limit 10;
+
+
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- funzioni di aggregazione 
+select *
+from mydb.personale p ;
+-- aggregano una certa quantità di dati 
+-- non possiamo mettere campi non appropriati alle funzioni di aggregazioni
+-- funzione count() conta le tuple
+select count(*)
+from mydb.personale p ;
+
+-- funzione max() estrae la tupla che ha il valore massimo di un espressione o attributo
+select
+max(((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))div 3600) * 12 + ((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))mod 3600 mod 60) * (12/60)) as guadagno_orario
+from mydb.test t;
+
+-- min()
+select
+min(((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))div 3600) * 12 + ((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))mod 3600 mod 60) * (12/60)) as guadagno_orario
+from mydb.test t;
+
+-- sum() somma tutte le tuple 
+select count(*),
+sum(((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))div 3600) * 12 + ((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))mod 3600 mod 60) * (12/60)) as spesa_totale
+from mydb.test t;
+
+
+-- avg() calcola la media
+select
+avg(((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))div 3600) * 12 + ((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))mod 3600 mod 60) * (12/60)) as pagati_a_turno
+from mydb.test t;
+
+-- dividiamo per persona guadagno totale con il codice fiscale, mettendo gli attributi del valore presente nel gropu by e le funzioni di aggregazione
+select t.codice_fiscale , count(*),
+sum(((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))div 3600) * 12 + ((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))mod 3600 mod 60) * (12/60)) as spesa_totale
+from mydb.test t
+group by t.codice_fiscale;
+
+
+
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- copiare le tuple del comando select su una nuova tabella
 -- ci serve intanto la tabella che contenga i campi con gli stessi attributi
 create table mydb.personale(
@@ -104,3 +173,4 @@ data_assunzione datetime
 insert into mydb.personale
 select distinct t.codice_fiscale, t.nome, t.cognome, t.fascia_stipendio, t.data_assunzione 
 from mydb.test t; 
+
