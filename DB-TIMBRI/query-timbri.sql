@@ -133,29 +133,46 @@ from mydb.personale p ;
 
 -- funzione max() estrae la tupla che ha il valore massimo di un espressione o attributo
 select
-max(((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))div 3600) * 12 + ((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))mod 3600 mod 60) * (12/60)) as guadagno_orario
+max(((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))div 3600) * 12 + ((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))mod 3600 mod 60) * (12/60)) as guadagno_orario 
 from mydb.test t;
 
 -- min()
 select
-min(((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))div 3600) * 12 + ((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))mod 3600 mod 60) * (12/60)) as guadagno_orario
+min(((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))div 3600) * 12 + ((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))mod 3600 mod 60) * (12/60)) as guadagno_orario 
 from mydb.test t;
 
 -- sum() somma tutte le tuple 
 select count(*),
-sum(((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))div 3600) * 12 + ((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))mod 3600 mod 60) * (12/60)) as spesa_totale
+sum(((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))div 3600) * 12 + ((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))mod 3600 mod 60) * (12/60)) as spesa_totale 
 from mydb.test t;
 
 
 -- avg() calcola la media
 select
-avg(((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))div 3600) * 12 + ((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))mod 3600 mod 60) * (12/60)) as pagati_a_turno
+avg(((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))div 3600) * 12 + ((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))mod 3600 mod 60) * (12/60)) as pagati_a_turno 
 from mydb.test t;
 
 -- dividiamo per persona guadagno totale con il codice fiscale, mettendo gli attributi del valore presente nel gropu by e le funzioni di aggregazione
-select t.codice_fiscale , count(*),
-sum(((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))div 3600) * 12 + ((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))mod 3600 mod 60) * (12/60)) as spesa_totale
+-- quando si usa la group by, si usa la clausola having, non è ammesso il where con una funzione di aggregazione
+select t.codice_fiscale, count(*),
+sum(((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))
+div 3600) * 12 
++ ((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))mod 3600 
+mod 60) * (12/60)) as guadagno_orario,
+avg(((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))
+div 3600) * 12 
++ ((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))mod 3600 
+mod 60) * (12/60)) as guadagno_medio
 from mydb.test t
+group by t.codice_fiscale
+having avg(((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))
+div 3600) * 12 
++ ((unix_timestamp(t.uscita) - unix_timestamp(t.ingresso))mod 3600 
+mod 60) * (12/60)) between 100 and 120;
+
+-- timbrature per persona
+select t.codice_fiscale, count(*)
+from mydb.test t 
 group by t.codice_fiscale;
 
 
@@ -173,4 +190,8 @@ data_assunzione datetime
 insert into mydb.personale
 select distinct t.codice_fiscale, t.nome, t.cognome, t.fascia_stipendio, t.data_assunzione 
 from mydb.test t; 
+
+delete from mydb.personale ;
+
+drop table mydb.personale;
 
