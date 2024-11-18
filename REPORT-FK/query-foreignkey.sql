@@ -43,9 +43,8 @@ select *
 from uniro.insegnamenti i;
 
 insert into uniro.esami(matricola_studente, codice_insegnamento, data_esame, voto, lode)
-select r.matricola_studente, r.codice_insegnamento, r.data, r.voto, r.lode
+select distinct r.matricola_studente, r.codice_insegnamento, r.data, r.voto, r.lode
 from uniro.report r;
 
 select *
 from uniro.esami e;
-
