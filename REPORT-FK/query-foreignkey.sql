@@ -39,12 +39,17 @@ insert into uniro.insegnamenti (codice_insegnamento, nome_insegnamento, crediti)
 select distinct r.codice_insegnamento, r.codice_insegnamento , r.crediti
 from uniro.report r;
 
+
 select *
 from uniro.insegnamenti i;
 
 insert into uniro.esami(matricola_studente, codice_insegnamento, data_esame, voto, lode)
 select distinct r.matricola_studente, r.codice_insegnamento, r.data, r.voto, r.lode
 from uniro.report r;
+
+-- vincolo non rispettato dal programmatore !!!!!!!!!!!!!!!!
+/*insert into uniro.esami (matricola_studente, codice_insegnamento, data_esame, voto, lode) values
+(65646, 646464, '2024-01-25', 5, 1);*/
 
 select *
 from uniro.esami e;
