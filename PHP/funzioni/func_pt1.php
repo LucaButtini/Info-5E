@@ -1,117 +1,115 @@
 <?php
-// 1. Union Type
-function calculateArea(int|float $value): int|float {
-    return $value * $value;
-}
-
-// Test union type
+// UNION TYPE
+// Una funzione può accettare più tipi di input grazie all'Union Type (es. int|float).
+// Questa funzione calcola un'operazione (somma o moltiplicazione) tra due numeri.
 echo "Union Type:<br>";
-echo calculateArea(5) . "<br>";      // Output: 25
-echo calculateArea(5.5) . "<br>";    // Output: 30.25
-echo "----------------------------<br>";
-
-// 2. Default Value
-function greet(string $name = "Guest"): string {
-    return "Hello, $name!";
+function calculateValue(int|float $a, int|float $b, string $operation): int|float {
+    if ($operation === "add") {
+        return $a + $b; // Somma
+    } elseif ($operation === "multiply") {
+        return $a * $b; // Moltiplicazione
+    }
+    return 0; // Caso predefinito
 }
+echo calculateValue(5, 3, "add") . "<br>";      // Output: 8
+echo calculateValue(5.5, 2, "multiply") . "<br>"; // Output: 11
 
-// Test default value
-echo "<br>Default Value:<br>";
-echo greet() . "<br>";               // Output: Hello, Guest!
-echo greet("Alice") . "<br>";      // Output: Hello, Alice!
-echo "----------------------------<br>";
-
-// 3. Ref Type, Value Type
-function incrementByValue($num) {
-    $num++;
-}
-
-function incrementByReference(&$num) {
-    $num++;
-}
-
-$value = 10;
-incrementByValue($value);
-echo "<br>Ref/Value Type:<br>";
-echo $value . "<br>";               // Output: 10
-
-incrementByReference($value);
-echo $value . "<br>";               // Output: 11
-echo "----------------------------<br>";
-
-// 4. Nullable Parameter
-function printMessage(?string $message): void {
-    echo $message ?? "No message provided.";
-}
-
-// Test nullable parameter
-echo "<br>Nullable Parameter:<br>";
-printMessage("Hello!");             // Output: Hello!
 echo "<br>";
-printMessage(null);                  // Output: No message provided.
-echo "<br>----------------------------<br>";
 
-// 5. Variadic Function
-function sumAll(...$numbers): int {
-    return array_sum($numbers);
+// DEFAULT VALUE
+// Una funzione può avere parametri con valori predefiniti. Se non viene passato un parametro,
+// il valore di default sarà usato (in questo caso, "Ospite").
+echo "Default Value:<br>";
+function welcomeMessage(string $name = "Ospite"): string {
+    return "Benvenuto, $name!";
 }
+echo welcomeMessage() . "<br>";         // Output: Benvenuto, Ospite!
+echo welcomeMessage("Maria") . "<br>"; // Output: Benvenuto, Maria!
 
-// Test variadic function
-echo "<br>Variadic Function:<br>";
-echo sumAll(1, 2, 3, 4) . "<br>";   // Output: 10
-echo "----------------------------<br>";
+echo "<br>";
 
-// 6. Variable Function
-function sayHello() {
-    return "Hello!";
+// REF TYPE VS VALUE TYPE
+// Differenza tra passaggio per valore (copia) e per riferimento (modifica l'originale).
+echo "Reference vs Value Type:<br>";
+function doubleValue($number) {
+    $number *= 2; // Modifica solo una copia del valore, non l'originale.
 }
-
-$func = "sayHello";
-
-// Test variable function
-echo "<br>Variable Function:<br>";
-echo $func() . "<br>";              // Output: Hello!
-echo "----------------------------<br>";
-
-// 7. Callback
-function processArray(array $arr, callable $callback): array {
-    return array_map($callback, $arr);
+function doubleReference(&$number) {
+    $number *= 2; // Modifica il valore originale grazie al passaggio per riferimento.
 }
+$num = 10;
+doubleValue($num);
+echo "Value Type: $num<br>"; // Output: 10 (non modificato)
+doubleReference($num);
+echo "Reference Type: $num<br>"; // Output: 20 (modificato)
 
-// Test callback function
-$result = processArray([1, 2, 3], fn($n) => $n * 2);
-echo "<br>Callback:<br>";
-print_r($result);
-echo "<br>----------------------------<br>";
+echo "<br>";
 
-// 8. Anonymous Functions
-$greet = function(string $name): string {
-    return "Hello, $name!";
+// NULLABLE PARAMETER
+// I parametri possono essere definiti come "nullable" aggiungendo il punto interrogativo (?).
+// Questo permette di accettare valori nulli oltre al tipo specificato.
+echo "Nullable Parameter:<br>";
+function displayMessage(?string $message): string {
+    // L'operatore ?? ritorna un valore predefinito se il parametro è null.
+    return $message ?? "Nessun messaggio fornito";
+}
+echo displayMessage("Ciao!") . "<br>";       // Output: Ciao!
+echo displayMessage(null) . "<br>";         // Output: Nessun messaggio fornito
+
+echo "<br>";
+
+// VARIADIC FUNCTION
+// Una funzione può accettare un numero variabile di parametri usando "...".
+// I parametri vengono raccolti in un array.
+echo "Variadic Function:<br>";
+function calculateSum(...$numbers): int {
+    return array_sum($numbers); // Somma tutti i numeri passati.
+}
+echo calculateSum(1, 2, 3, 4, 5) . "<br>";  // Output: 15
+echo calculateSum(10, 20, 30) . "<br>";     // Output: 60
+
+echo "<br>";
+
+// VARIABLE FUNCTION
+// Si può chiamare una funzione il cui nome è contenuto in una variabile.
+// Qui usiamo una variabile per decidere dinamicamente quale funzione chiamare.
+echo "Variable Function:<br>";
+function addition($a, $b): int {
+    return $a + $b;
+}
+function subtraction($a, $b): int {
+    return $a - $b;
+}
+// Randomizziamo quale funzione chiamare (addition o subtraction).
+$randomFunction = mt_rand(0, 1) ? "addition" : "subtraction";
+echo "Eseguito: $randomFunction<br>";
+// La variabile contiene il nome della funzione, che viene eseguita come tale.
+echo $randomFunction(10, 5) . "<br>"; // Output dipende dalla funzione scelta
+
+echo "<br>";
+
+// CALLBACK
+// Una funzione può accettare un'altra funzione come parametro (callback).
+// Questo permette di applicare operazioni personalizzate a una lista di dati.
+echo "Callback Function:<br>";
+function processList(array $list, callable $callback): array {
+    // Applica il callback a ogni elemento dell'array usando array_map.
+    return array_map($callback, $list);
+}
+$numbers = [1, 2, 3, 4];
+$processed = processList($numbers, function($n) {
+    return $n * $n; // Ritorna il quadrato di ogni numero.
+});
+print_r($processed); // Output: Array con i quadrati degli elementi
+echo "<br>";
+
+echo "<br>";
+
+// ANONYMOUS FUNCTIONS
+// Le funzioni anonime non hanno un nome e possono essere salvate in variabili o passate come parametri.
+// Sono utili per operazioni semplici e temporanee.
+echo "Anonymous Functions:<br>";
+$multiply = function(int $a, int $b): int {
+    return $a * $b; // Ritorna il prodotto di due numeri.
 };
-
-// Test anonymous function
-echo "<br>Anonymous Functions:<br>";
-echo $greet("Alice") . "<br>";      // Output: Hello, Alice!
-echo "----------------------------<br>";
-
-// General Exercise
-function processMixedArray(array $values): array {
-    $strings = array_filter($values, fn($v) => is_string($v));
-    $numbers = array_filter($values, fn($v) => is_numeric($v));
-
-    $processedStrings = processArray($strings, fn($s) => strtoupper($s));
-    $processedNumbers = processArray($numbers, fn($n) => $n * 2);
-
-    return [
-        'strings' => $processedStrings,
-        'numbers' => $processedNumbers,
-    ];
-}
-
-// Test general exercise
-echo "<br>General Exercise:<br>";
-$mixed = ["hello", 2, "world", 3.5, "php"];
-$result = processMixedArray($mixed);
-print_r($result);
-echo "<br>----------------------------<br>";
-
+echo $multiply(4, 5) . "<br>"; // Output: 20
