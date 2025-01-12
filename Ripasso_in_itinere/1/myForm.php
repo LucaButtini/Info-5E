@@ -12,7 +12,7 @@
     <title>Domande</title>
 </head>
 <body>
-<div id="intro">
+<div id="intro1">
     <h1>DOMANDE DBMS</h1>
     <p>Rispondi alle seguenti domande relative ai DBMS:</p>
 </div>
@@ -23,7 +23,7 @@
         <!-- Domanda 1 -->
         <label for="d1">1. Cos'è un DBMS?</label>
         <br>
-        <textarea id="d1" rows="5" cols="40" name="d1"></textarea>
+        <textarea id="d1" rows="5" cols="60" name="d1"></textarea>
         <br><br>
 
         <!-- Domanda 2 -->
@@ -69,7 +69,7 @@
         <!-- Domanda 5 -->
         <label for="d5">5. Qual è la differenza principale tra SQL e NoSQL?</label>
         <br>
-        <textarea id="d5" rows="5" cols="40" name="d5"></textarea>
+        <textarea id="d5" rows="5" cols="60" name="d5"></textarea>
         <br><br>
 
         <!-- Domanda 6 -->
