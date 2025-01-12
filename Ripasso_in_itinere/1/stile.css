@@ -12,8 +12,8 @@ body {
     background-color: #ffffff;
     color: black;
     border-radius: 15px;
-    height: 1000px;
     width: 800px;
+    max-width: 90%; /* Adatta meglio su schermi più piccoli */
     backdrop-filter: blur(40px);
     margin: 20px auto;
     display: flex;
@@ -21,8 +21,10 @@ body {
     justify-content: center;
     align-items: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 10px;
+    padding: 20px;
+    min-height: 300px; /* Altezza minima per assicurare il layout */
 }
+
 
 .response-container {
     background-color: #f4f4f4;
