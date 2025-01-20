@@ -71,11 +71,27 @@ try {
 
 //update
 
-$query='update studenti set media=:media where nome=:nome';
+/*$query='update studenti set media=:media where nome=:nome';
 try{
     $stm = $db->prepare($query);
     $stm->bindValue(':nome', 'Lucy');
     $stm->bindValue(':media', 3);
+    if($stm->execute()){
+        $stm->closeCursor();
+    }else{
+        throw new PDOException('Errore nella query');
+    }
+}catch (Exception $e){
+    logError($e);
+}*/
+
+
+// delete
+
+$query= 'delete from studenti where nome=:nome';
+try{
+    $stm = $db->prepare($query);
+    $stm->bindValue(':nome', 'Lucy');
     if($stm->execute()){
         $stm->closeCursor();
     }else{
