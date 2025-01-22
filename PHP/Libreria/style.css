@@ -1,0 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+* {
+    font-family: "Poppins", sans-serif;
+}
+
+.container {
+    min-height: calc(90vh - 160px);
+    /* calcola l'altezza disponibile sottraendo l'altezza della navbar e del footer */
+    padding-bottom: 60px;
+    /* per evitare che il contenuto si sovrapponga al footer */
+}
+
+#img-home {
+    width: 50%; /* Modifica questa percentuale in base alle tue esigenze */
+    height: 40%; /* Mantiene le proporzioni originali */
+}
+
