@@ -1,11 +1,11 @@
 <?php
-require_once 'db.php';  // Includi il file che contiene la connessione
+require_once 'db.php';
 
-// Variabili per i messaggi di errore o successo
+
 $message = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Ricezione dei dati dal form
+    // prendo dati dal form
     $titolo = $_POST['titolo'];
     $autore = $_POST['autore'];
     $genere = $_POST['genere'];
@@ -20,16 +20,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     elseif (!$anno_pubblicazione || strtotime($anno_pubblicazione) === false) {
         $message = "La data di pubblicazione non è valida.";
     }
-    // Controllo su eventuali campi vuoti
+    // controlli campi vuoti
     elseif (!empty($titolo) && !empty($autore) && !empty($genere) && !empty($prezzo) && !empty($anno_pubblicazione)) {
-        // Query per inserire il libro nel database
-        $query = "INSERT INTO libri (title, autore, genere, prezzo, anno_pubblicazione) 
-                  VALUES (:titolo, :autore, :genere, :prezzo, :anno_pubblicazione)";
 
-        // Usa la connessione $db definita in db.php
+        $query = "INSERT INTO libri (title, autore, genere, prezzo, anno_pubblicazione) VALUES (:titolo, :autore, :genere, :prezzo, :anno_pubblicazione)";
+
+
         $stmt = $db->prepare($query);
 
-        // Bind dei parametri
         $stmt->bindValue(':titolo', $titolo, PDO::PARAM_STR);
         $stmt->bindValue(':autore', $autore, PDO::PARAM_STR);
         $stmt->bindValue(':genere', $genere, PDO::PARAM_STR);
@@ -127,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <label for="anno_pubblicazione" class="form-label">Anno di Pubblicazione</label>
             <input type="date" class="form-control" id="anno_pubblicazione" name="anno_pubblicazione" required>
         </div>
-        <button type="submit" class="btn btn-primary">Aggiungi Libro</button>
+        <button type="submit" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Aggiungi Libro</button>
     </form>
 
 </div>

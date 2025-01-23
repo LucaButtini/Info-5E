@@ -1,7 +1,7 @@
 <?php
-require_once 'db.php'; // Inclusione del file per la connessione al database
+require_once 'db.php';
 
-// Funzione per loggare gli errori nel file log/database_log
+
 function logError(Exception $e){
     if (!is_dir('log')) {
         mkdir('log', 0777, true); // Creare la cartella log se non esiste
@@ -62,7 +62,7 @@ function logError(Exception $e){
 <div class="container mt-5 rounded-4 p-5 bg-white">
     <div class="text-center pt-3">
         <h1 class="text-danger"><strong>La Libreria Digitale</strong></h1>
-        <p class="lead">Visualizza la tua libreria:</p>
+        <p class="lead">Visualizza la tua libreria (aggiornare la pagina per visualizzare eventuali modifiche):</p>
     </div>
 
     <div class="table-responsive mt-4">
@@ -84,8 +84,7 @@ function logError(Exception $e){
                 $stm = $db->prepare($query);
                 $stm->execute();
 
-                // Ciclo per stampare i dati riga per riga
-                while ($libro = $stm->fetch(PDO::FETCH_OBJ)) {
+                while ($libro = $stm->fetch()) {
                     echo "<tr>";
                     echo "<td>" . htmlspecialchars($libro->ISBN) . "</td>";
                     echo "<td>" . htmlspecialchars($libro->title) . "</td>";
@@ -98,7 +97,7 @@ function logError(Exception $e){
 
                 $stm->closeCursor();
             } catch (Exception $e) {
-                logError($e); // Chiama la funzione di logging in caso di errore
+                logError($e);
             }
             ?>
             </tbody>
