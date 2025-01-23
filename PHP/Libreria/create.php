@@ -24,13 +24,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     elseif (!empty($titolo) && !empty($autore) && !empty($genere) && !empty($prezzo) && !empty($anno_pubblicazione)) {
         // Query per inserire il libro nel database
         $query = "INSERT INTO libri (title, autore, genere, prezzo, anno_pubblicazione) 
-                  VALUES (?, ?, ?, ?, ?)";
-        $stmt = $db->prepare($query);  // Usa la connessione $db definita in db.php
-        $stmt->bindParam(1, $titolo);
-        $stmt->bindParam(2, $autore);
-        $stmt->bindParam(3, $genere);
-        $stmt->bindParam(4, $prezzo);
-        $stmt->bindParam(5, $anno_pubblicazione);
+                  VALUES (:titolo, :autore, :genere, :prezzo, :anno_pubblicazione)";
+
+        // Usa la connessione $db definita in db.php
+        $stmt = $db->prepare($query);
+
+        // Bind dei parametri
+        $stmt->bindValue(':titolo', $titolo, PDO::PARAM_STR);
+        $stmt->bindValue(':autore', $autore, PDO::PARAM_STR);
+        $stmt->bindValue(':genere', $genere, PDO::PARAM_STR);
+        $stmt->bindValue(':prezzo', $prezzo, PDO::PARAM_STR);
+        $stmt->bindValue(':anno_pubblicazione', $anno_pubblicazione, PDO::PARAM_STR);
 
         if ($stmt->execute()) {
             $message = "Libro aggiunto con successo!";
