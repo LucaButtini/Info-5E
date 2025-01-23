@@ -29,16 +29,16 @@
                     <a class="nav-link active" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Aggiungi libro</a>
+                    <a class="nav-link" href="create.php">Aggiungi libro</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Visualizza libreria</a>
+                    <a class="nav-link" href="read.php">Visualizza libreria</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Aggiorna prezzo libro</a>
+                    <a class="nav-link" href="update.php">Aggiorna prezzo libro</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Elimina libro</a>
+                    <a class="nav-link" href="delete.php">Elimina libro</a>
                 </li>
             </ul>
         </div>
@@ -47,7 +47,7 @@
 
 <div class="container mt-5 rounded-4 p-5 bg-white">
     <div class="text-center pt-3">
-        <h1 class="text-primary"><strong>La Libreria Digitale</strong></h1>
+        <h1 class="text-danger"><strong>La Libreria Digitale</strong></h1>
         <p class="lead">Benvenuto nella gestione della libreria digitale.</p>
     </div>
 
