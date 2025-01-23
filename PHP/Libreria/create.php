@@ -1,8 +1,46 @@
 <?php
-require_once 'db.php';
+require_once 'db.php';  // Includi il file che contiene la connessione
 
+// Variabili per i messaggi di errore o successo
+$message = '';
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Ricezione dei dati dal form
+    $titolo = $_POST['titolo'];
+    $autore = $_POST['autore'];
+    $genere = $_POST['genere'];
+    $prezzo = $_POST['prezzo'];
+    $anno_pubblicazione = $_POST['anno_pubblicazione'];
 
+    // Controllo sul prezzo (deve essere positivo)
+    if ($prezzo < 0) {
+        $message = "Il prezzo non può essere negativo!";
+    }
+    // Controllo sulla data di pubblicazione (deve essere una data valida)
+    elseif (!$anno_pubblicazione || strtotime($anno_pubblicazione) === false) {
+        $message = "La data di pubblicazione non è valida.";
+    }
+    // Controllo su eventuali campi vuoti
+    elseif (!empty($titolo) && !empty($autore) && !empty($genere) && !empty($prezzo) && !empty($anno_pubblicazione)) {
+        // Query per inserire il libro nel database
+        $query = "INSERT INTO libri (title, autore, genere, prezzo, anno_pubblicazione) 
+                  VALUES (?, ?, ?, ?, ?)";
+        $stmt = $db->prepare($query);  // Usa la connessione $db definita in db.php
+        $stmt->bindParam(1, $titolo);
+        $stmt->bindParam(2, $autore);
+        $stmt->bindParam(3, $genere);
+        $stmt->bindParam(4, $prezzo);
+        $stmt->bindParam(5, $anno_pubblicazione);
+
+        if ($stmt->execute()) {
+            $message = "Libro aggiunto con successo!";
+        } else {
+            $message = "Errore nell'inserimento del libro.";
+        }
+    } else {
+        $message = "Tutti i campi devono essere compilati!";
+    }
+}
 ?>
 
 <!doctype html>
@@ -55,7 +93,12 @@ require_once 'db.php';
         <p class="lead">Inserisci il libro nella libreria:</p>
     </div>
 
-
+    <!-- Messaggio di errore o successo come alert JavaScript -->
+    <?php if ($message != '') : ?>
+        <script>
+            alert("<?php echo $message; ?>");
+        </script>
+    <?php endif; ?>
 
     <!-- Form di inserimento libro -->
     <form action="create.php" method="POST">
@@ -73,11 +116,12 @@ require_once 'db.php';
         </div>
         <div class="mb-3">
             <label for="prezzo" class="form-label">Prezzo</label>
-            <input type="number" step="0.01" class="form-control" id="prezzo" name="prezzo" required>
+            <input type="number" class="form-control" id="prezzo" name="prezzo" min="0" step="0.01" required>
+            <small id="prezzoHelp" class="form-text text-muted">Inserisci il prezzo in formato numerico (es. 10.50).</small>
         </div>
         <div class="mb-3">
             <label for="anno_pubblicazione" class="form-label">Anno di Pubblicazione</label>
-            <input type="number" class="form-control" id="anno_pubblicazione" name="anno_pubblicazione" required>
+            <input type="date" class="form-control" id="anno_pubblicazione" name="anno_pubblicazione" required>
         </div>
         <button type="submit" class="btn btn-primary">Aggiungi Libro</button>
     </form>
@@ -85,12 +129,12 @@ require_once 'db.php';
 </div>
 
 <footer>
-    <div class="bg-dark py-5 mt-5 text-center rounded-3"> <!-- Aggiunto rounded-3 -->
+    <div class="bg-dark py-5 mt-5 text-center rounded-3">
         <p class="display-6 mb-3 text-white">Buttini Luca 5-E</p>
         <small class="text-white-50">&copy; 2025 Libreria Digitale. All rights reserved.</small>
     </div>
 </footer>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
