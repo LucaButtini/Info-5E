@@ -1,0 +1,20 @@
+.topnav{
+    background-color: dodgerblue;
+    padding: 20px;
+}
+
+.topnav a{
+    color: white;
+    padding: 5px;
+    margin: 10px;
+}
+
+.footer{
+    background-color: dodgerblue;
+    position: fixed;
+    left:0;
+    bottom: 0;
+    color: white;
+    text-align: center;
+    width: 100%;
+}

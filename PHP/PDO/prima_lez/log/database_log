@@ -1,0 +1,20 @@
+SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens---2025-01-20 12:57:35
+SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens---2025-01-20 12:57:36
+SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens---2025-01-20 12:57:54
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1---2025-01-20 12:58:59
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1---2025-01-20 12:59:00
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1---2025-01-20 12:59:06
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1---2025-01-20 12:59:07
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1---2025-01-20 12:59:08
+SQLSTATE[21S01]: Insert value list does not match column list: 1136 Column count doesn't match value count at row 1---2025-01-20 13:00:55
+SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '00015' for key 'PRIMARY'---2025-01-20 13:01:38
+SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '00015' for key 'PRIMARY'---2025-01-20 13:01:38
+SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '00015' for key 'PRIMARY'---2025-01-20 13:01:38
+SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '00015' for key 'PRIMARY'---2025-01-20 13:01:39
+SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '00015' for key 'PRIMARY'---2025-01-20 13:01:39
+SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '00015' for key 'PRIMARY'---2025-01-20 13:01:39
+SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '00015' for key 'PRIMARY'---2025-01-20 13:01:39
+SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '00015' for key 'PRIMARY'---2025-01-20 13:01:54
+SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '00015' for key 'PRIMARY'---2025-01-20 13:02:03
+SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens---2025-01-20 13:05:05
+SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens---2025-01-20 13:05:11

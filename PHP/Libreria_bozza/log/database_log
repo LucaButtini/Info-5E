@@ -1,0 +1,2 @@
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'libreria.libri' doesn't exist --- 2025-01-23 23:17:28
+SQLSTATE[HY000] [1049] Unknown database 'libreria'---2025-01-24 11:38:15
