@@ -1,19 +1,6 @@
 <?php
-require_once 'db.php'; // Inclusione del file per la connessione al database
+require_once 'db.php';
 require 'header.php';
-
-// Funzione per loggare gli errori nel file log/database_log
-function logError(Exception $e){
-    if (!is_dir('log')) {
-        mkdir('log', 0777, true); // Creare la cartella log se non esiste
-    }
-    error_log(
-        $e->getMessage() . ' --- ' . date('Y-m-d H:i:s') . "\n",
-        3,
-        'log/database_log'
-    );
-    echo '<script>alert("Si è verificato un problema con il database. Per favore riprova più tardi.");</script>';
-}
 
 // Variabile per l'alert JavaScript
 $alertMessage = '';
