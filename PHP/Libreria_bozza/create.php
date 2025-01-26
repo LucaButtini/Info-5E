@@ -6,6 +6,10 @@ require 'header.php';
 <?php
 
 $message = '';
+//serve per verificare come la pagina PHP è stata "richiesta" o "acceduta" dal browser dell'utente.
+//$_SERVER è una superglobale in PHP, ovvero una variabile predefinita accessibile ovunque nel codice. Contiene informazioni sul server e sull'ambiente di esecuzione.
+//$_SERVER['REQUEST_METHOD']: Specifica il metodo HTTP utilizzato per la richiesta.
+//Questa condizione controlla se il metodo della richiesta HTTP è POST
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // prendo dati dal form
