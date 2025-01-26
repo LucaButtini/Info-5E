@@ -19,8 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $query = "UPDATE libri SET prezzo = :prezzo WHERE ISBN = :isbn";
         try {
             $stm = $db->prepare($query);
-            $stm->bindParam(':isbn', $isbn, PDO::PARAM_INT);
-            $stm->bindParam(':prezzo', $nuovoPrezzo, PDO::PARAM_STR);
+            $stm->bindParam(':isbn', $isbn);
+            $stm->bindParam(':prezzo', $nuovoPrezz);
             $stm->execute();
 
             $alertMessage = "Prezzo del libro aggiornato con successo!";

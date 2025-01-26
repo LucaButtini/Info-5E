@@ -35,11 +35,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $stmt = $db->prepare($query);
 
-        $stmt->bindValue(':titolo', $titolo, PDO::PARAM_STR);
-        $stmt->bindValue(':autore', $autore, PDO::PARAM_STR);
-        $stmt->bindValue(':genere', $genere, PDO::PARAM_STR);
-        $stmt->bindValue(':prezzo', $prezzo, PDO::PARAM_STR);
-        $stmt->bindValue(':anno_pubblicazione', $anno_pubblicazione, PDO::PARAM_STR);
+        $stmt->bindValue(':titolo', $titolo);
+        $stmt->bindValue(':autore', $autore);
+        $stmt->bindValue(':genere', $genere);
+        $stmt->bindValue(':prezzo', $prezzo);
+        $stmt->bindValue(':anno_pubblicazione', $anno_pubblicazione);
 
         if ($stmt->execute()) {
             $message = "Libro aggiunto con successo!";
