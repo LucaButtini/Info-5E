@@ -1,5 +1,6 @@
 <?php
 $page = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -13,7 +14,7 @@ $page = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="icon" href="Immagini/home.ico" type="image/x-icon">
-    <title>Home</title>
+    <title><?=/**@var $title*/ $title?></title>
 </head>
 <body class="bg-body-tertiary">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -26,7 +27,7 @@ $page = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link <?= $page == 'index.php' ? 'active':''; ?>" href="index.php">Home</a>
+                    <a class="nav-link <?=($_SERVER['PHP_SELF'] === '/5e/Libreria_bozza/index.php')? 'active' : ''?>" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?= $page == 'create.php' ? 'active':''; ?>" href="create.php">Aggiungi libro</a>

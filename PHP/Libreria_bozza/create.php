@@ -1,9 +1,9 @@
 <?php
 require_once 'db.php';
-require 'header.php';
-?>
 
-<?php
+$title='Create';
+
+require 'header.php';
 
 $message = '';
 //serve per verificare come la pagina PHP è stata "richiesta" o "acceduta" dal browser dell'utente.

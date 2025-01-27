@@ -2,6 +2,8 @@
 require_once 'db.php';
 require 'header.php';
 
+$title='Update';
+
 // Variabile per l'alert JavaScript
 $alertMessage = '';
 

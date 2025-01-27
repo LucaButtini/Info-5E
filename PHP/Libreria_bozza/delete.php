@@ -1,19 +1,10 @@
 <?php
-require_once 'db.php'; // Inclusione del file di connessione al database
-require 'header.php'; // Inclusione dell'header
+require_once 'db.php';
+require 'header.php';
+
+$title='Delete';
 
 // Funzione per loggare gli errori nel file log/database_log
-function logError(Exception $e){
-    if (!is_dir('log')) {
-        mkdir('log', 0777, true); // Creare la cartella log se non esiste
-    }
-    error_log(
-        $e->getMessage() . ' --- ' . date('Y-m-d H:i:s') . "\n",
-        3,
-        'log/database_log'
-    );
-    echo '<script>alert("Si è verificato un problema con il database. Per favore riprova più tardi.");</script>';
-}
 
 // Variabile per l'alert JavaScript
 $alertMessage = '';
@@ -77,5 +68,5 @@ if (!empty($alertMessage)) {
 </div>
 
 <?php
-require 'footer.php'; // Inclusione del footer
+require 'footer.php';
 ?>
