@@ -1,7 +1,8 @@
 <?php
-require 'header.php';
+
 
 $title='Home';
+require 'header.php';
 ?>
 <div class="container mt-5 rounded-4 p-5 bg-white">
     <div class="text-center pt-3">

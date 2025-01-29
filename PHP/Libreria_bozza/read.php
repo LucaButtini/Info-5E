@@ -1,8 +1,9 @@
 <?php
 require_once 'db.php';
-require 'header.php';
+
 
 $title='Read';
+require 'header.php';
 
 // Query per ottenere i dati dalla tabella "libri"
 $query = 'SELECT * FROM libreria.libri';

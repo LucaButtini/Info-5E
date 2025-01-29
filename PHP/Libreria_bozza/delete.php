@@ -1,8 +1,10 @@
 <?php
 require_once 'db.php';
-require 'header.php';
+
 
 $title='Delete';
+
+require 'header.php';
 
 // Funzione per loggare gli errori nel file log/database_log
 

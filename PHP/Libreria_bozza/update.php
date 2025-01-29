@@ -1,8 +1,9 @@
 <?php
 require_once 'db.php';
-require 'header.php';
+
 
 $title='Update';
+require 'header.php';
 
 // Variabile per l'alert JavaScript
 $alertMessage = '';
@@ -50,7 +51,7 @@ if (!empty($alertMessage)) {
     <form action="update.php" method="POST" class="mt-4">
         <div class="mb-3">
             <label for="isbn" class="form-label">ISBN del libro:</label>
-            <input type="number" name="isbn" id="isbn" class="form-control" placeholder="Inserisci l'ISBN del libro" required>
+            <input type="number" name="isbn" id="isbn" class="form-control" placeholder="Inserisci l'ISBN del libro"  min="0" required>
         </div>
         <div class="mb-3">
             <label for="prezzo" class="form-label">Nuovo prezzo (€):</label>
