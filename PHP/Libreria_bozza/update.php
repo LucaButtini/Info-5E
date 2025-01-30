@@ -30,15 +30,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } catch (Exception $e) {
             logError($e);
         }
-    } else {
-        $alertMessage = "Inserisci un ISBN valido e un prezzo numerico valido.";
     }
+    header('Location: confirm_page.html');
 }
 
-// Stampa l'alert in JavaScript se il messaggio è impostato
-if (!empty($alertMessage)) {
-    echo "<script>alert('$alertMessage');</script>";
-}
 ?>
 
 

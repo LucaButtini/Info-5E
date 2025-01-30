@@ -29,18 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Esegui la query
             $stmt->execute();
-
-            if ($stmt->rowCount() > 0) {
-                $alertMessage = "Il libro è stato eliminato con successo!";
-            } else {
-                $alertMessage = "Nessun libro trovato con il titolo e l'autore specificati.";
-            }
         } catch (Exception $e) {
             logError($e);
         }
-    } else {
-        $alertMessage = "Inserisci sia il titolo che l'autore.";
     }
+    header('Location: confirm_page.html');
 }
 
 // Stampa l'alert in JavaScript se il messaggio è impostato
