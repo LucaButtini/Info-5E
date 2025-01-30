@@ -11,9 +11,3 @@ prezzo decimal(10,2),
 anno_pubblicazione date
 );
 
-
-select *
-from libreria.libri l ;
-
-
-drop table libreria.libri;

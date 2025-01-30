@@ -5,35 +5,27 @@ require_once 'db.php';
 $title='Update';
 require 'header.php';
 
-// Variabile per l'alert JavaScript
-$alertMessage = '';
 
 // Aggiorna il prezzo del libro se il modulo è stato inviato
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $isbn = $_POST['isbn'];
     $nuovoPrezzo = $_POST['prezzo'];
 
-    // Controllo sul prezzo (deve essere positivo)
-    if ($nuovoPrezzo < 0) {
-        $alertMessage = "Il prezzo non può essere negativo!";
-    }
-    // Controllo su eventuali campi vuoti
-    elseif (!empty($isbn) && !empty($nuovoPrezzo) && is_numeric($nuovoPrezzo)) {
-        $query = "UPDATE libri SET prezzo = :prezzo WHERE ISBN = :isbn";
-        try {
-            $stm = $db->prepare($query);
-            $stm->bindParam(':isbn', $isbn);
-            $stm->bindParam(':prezzo', $nuovoPrezzo);
-            $stm->execute();
+    // Query di aggiornamento prezzo
+    $query = "UPDATE libri SET prezzo = :prezzo WHERE ISBN = :isbn";
+    try {
+        $stm = $db->prepare($query);
+        $stm->bindParam(':isbn', $isbn);
+        $stm->bindParam(':prezzo', $nuovoPrezzo);
+        $stm->execute();
 
-            $alertMessage = "Prezzo del libro aggiornato con successo!";
-        } catch (Exception $e) {
-            logError($e);
-        }
-    } else {
-        $alertMessage = "Inserisci un ISBN valido e un prezzo numerico valido.";
+        // Redirect alla pagina di conferma
+        header('Location: confirm_page.html');
+        exit();
+    } catch (Exception $e) {
+        // Gestisci l'errore del database
+        error_log($e->getMessage());
     }
-    header('Location: confirm_page.html');
 }
 
 ?>

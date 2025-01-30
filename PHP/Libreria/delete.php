@@ -1,22 +1,15 @@
 <?php
 require_once 'db.php';
 
-
-$title='Delete';
-
+$title = 'Delete';
 require 'header.php';
-
-// Funzione per loggare gli errori nel file log/database_log
-
-// Variabile per l'alert JavaScript
-$alertMessage = '';
 
 // Verifica se il form è stato inviato
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = $_POST['title'] ?? '';
     $autore = $_POST['autore'] ?? '';
 
-    // Validazione dei dati
+    // Se titolo e autore non sono vuoti, procedi con l'eliminazione
     if (!empty($title) && !empty($autore)) {
         try {
             // Query per eliminare il libro in base al titolo e all'autore
@@ -30,15 +23,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Esegui la query
             $stmt->execute();
         } catch (Exception $e) {
-            logError($e);
+            // Log degli errori
+            error_log($e->getMessage());
         }
     }
+    // Reindirizza alla pagina di conferma dopo l'eliminazione
     header('Location: confirm_page.html');
-}
-
-// Stampa l'alert in JavaScript se il messaggio è impostato
-if (!empty($alertMessage)) {
-    echo "<script>alert('$alertMessage');</script>";
+    exit();
 }
 ?>
 

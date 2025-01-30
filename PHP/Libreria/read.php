@@ -13,7 +13,7 @@ try {
     $stm->execute();
 
     ob_start();
-    while ($libro = $stm->fetch(PDO::FETCH_OBJ)) {
+    while ($libro = $stm->fetch()) {
         //creo le righe della tabella
         echo "<tr>";
         echo "<td>" . htmlspecialchars($libro->ISBN) . "</td>";
