@@ -1,6 +1,5 @@
 <?php
 
-
 $title='Home';
 require 'header.php';
 ?>
