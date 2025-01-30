@@ -22,10 +22,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Controllo sul prezzo (deve essere positivo)
     if ($prezzo < 0) {
         $message = "Il prezzo non può essere negativo!";
-    } // Controllo sulla data di pubblicazione (deve essere una data valida)
+    }
+    // Controllo sulla data di pubblicazione (deve essere una data valida)
     elseif (!$anno_pubblicazione || strtotime($anno_pubblicazione) === false) {
         $message = "La data di pubblicazione non è valida.";
-    } // controlli campi vuoti
+    }
+    // controlli campi vuoti
     elseif (!empty($titolo) && !empty($autore) && !empty($genere) && !empty($prezzo) && !empty($anno_pubblicazione)) {
 
         $query = "INSERT INTO libri (title, autore, genere, prezzo, anno_pubblicazione) VALUES (:titolo, :autore, :genere, :prezzo, :anno_pubblicazione)";
@@ -38,8 +40,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bindValue(':genere', $genere);
         $stmt->bindValue(':prezzo', $prezzo);
         $stmt->bindValue(':anno_pubblicazione', $anno_pubblicazione);
-        header('Location: confirm_page.html');
+
+        if ($stmt->execute()) {
+            $message = "Libro aggiunto con successo!";
+        } else {
+            $message = "Errore nell'inserimento del libro.";
+        }
+    } else {
+        $message = "Tutti i campi devono essere compilati!";
     }
+    header('Location: confirm_page.html');
 }
 
 ?>

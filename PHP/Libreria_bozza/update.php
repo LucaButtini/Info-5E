@@ -23,13 +23,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         try {
             $stm = $db->prepare($query);
             $stm->bindParam(':isbn', $isbn);
-            $stm->bindParam(':prezzo', $nuovoPrezz);
+            $stm->bindParam(':prezzo', $nuovoPrezzo);
             $stm->execute();
 
             $alertMessage = "Prezzo del libro aggiornato con successo!";
         } catch (Exception $e) {
             logError($e);
         }
+    } else {
+        $alertMessage = "Inserisci un ISBN valido e un prezzo numerico valido.";
     }
     header('Location: confirm_page.html');
 }
