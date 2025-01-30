@@ -51,11 +51,11 @@ if (!empty($alertMessage)) {
     <!-- Form per la cancellazione di un libro -->
     <form method="post" action="delete.php" class="mt-4">
         <div class="mb-3">
-            <label for="title" class="form-label">Titolo del libro</label>
+            <label for="title" class="form-label">Titolo del libro:</label>
             <input type="text" class="form-control" id="title" name="title" placeholder="Inserisci il titolo del libro" required>
         </div>
         <div class="mb-3">
-            <label for="autore" class="form-label">Autore del libro</label>
+            <label for="autore" class="form-label">Autore del libro:</label>
             <input type="text" class="form-control" id="autore" name="autore" placeholder="Inserisci l'autore del libro" required>
         </div>
         <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i> Elimina Libro</button>
