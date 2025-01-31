@@ -27,7 +27,11 @@ giro_veloce decimal(10,2)
 
 
 create table campionato.partecipare(
-
+numero_pilota int,
+id_gara int, 
+primary key (numero_pilota, id_gara),
+foreign key (numero_pilota) references campionato.piloti(numero),
+foreign key (id_gara) references campionato.gare(id_gara)
 );
 
 
