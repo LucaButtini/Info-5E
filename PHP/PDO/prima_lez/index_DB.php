@@ -1,8 +1,14 @@
 <?php
-
+//ho spostato la configurazione su un file a parte e la classe per la connessione
+require 'Dbconn.php';
 // dsn data source name
 // la configurazione è data tramite array associativo
-$db= new PDO('mysql:host=localhost;dbname=itis', 'root', '', [PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE=>PDO::FETCH_OBJ]);
+//$db= new PDO('mysql:host=localhost;dbname=itis', 'root', '', [PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE=>PDO::FETCH_OBJ]);
+
+$config = require 'database_config.php';
+$db= DBconn::getDb($config);
+
+//$db= new Pdo($config['dns'], $config['username'], $config['password'], $config['options']);
 
 //var_dump($db);
 
