@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->bindValue(':prezzo', $prezzo);
     $stmt->bindValue(':anno_pubblicazione', $anno_pubblicazione);
     $stmt->execute();
-
++
     // Redirect alla pagina di conferma
     header('Location: confirm_page.html');
     exit();
