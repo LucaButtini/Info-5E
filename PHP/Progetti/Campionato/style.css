@@ -3,3 +3,9 @@
 * {
     font-family: "Poppins", sans-serif;
 }
+
+#img-camp{
+    width: 50%;
+    height: 40%;
+    border: white solid 2px;
+}

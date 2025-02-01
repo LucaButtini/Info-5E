@@ -12,7 +12,7 @@ $page = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
     <link rel="stylesheet" href="style.css">
     <title>Campionato</title>
 </head>
-<body>
+<body class="bg-black">
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
