@@ -18,7 +18,6 @@ require 'header.php';
             </div>
             <button type="submit" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Aggiungi Casa</button>
         </form>
-
 </div>
 
 </div>
