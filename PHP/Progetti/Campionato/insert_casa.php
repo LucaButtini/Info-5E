@@ -13,13 +13,8 @@ require 'header.php';
                 <input type="text" class="form-control" id="nome_casa" placeholder="Nome" required>
             </div>
             <div class="mb-4">
-                <label for="nome_casa" class="form-label">Seleziona Livrea:</label>
-                <select class="form-select" aria-label="Default select example" required>
-                    <option selected>Livrea</option>
-                    <option value="1">Rosso</option>
-                    <option value="2">Nero</option>
-                    <option value="3">Blu</option>
-                </select>
+                <label for="livrea" class="form-label">Seleziona Livrea:</label>
+                <input type="text" class="form-control" id="livrea" placeholder="Livrea" required>
             </div>
             <button type="submit" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Aggiungi Casa</button>
         </form>
