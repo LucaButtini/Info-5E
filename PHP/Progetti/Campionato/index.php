@@ -1,10 +1,5 @@
 <?php
 
-require 'Dbconnection.php';
-
-$config= require('db_config.php');
-
-$db= Dbconnection::getDb($config);
 
 require 'header.php';
 ?>
@@ -19,6 +14,13 @@ require 'header.php';
     <div class="text-center my-4">
         <img src="Immagini/campionato.webp" class="rounded-4" id="img-camp">
     </div>
+
+    <div class="text-center mt-4">
+        <a href="iscrizione.php" class="btn btn-primary btn-lg">
+            Premi per iscriverti al campionato
+        </a>
+    </div>
+
 </div>
 
 <?php

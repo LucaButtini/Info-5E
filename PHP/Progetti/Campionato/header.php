@@ -25,11 +25,31 @@ $page = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
                 <li class="nav-item">
                     <a class="nav-link active" href="#">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Inserimento
+                    </a>
+                    <ul class="dropdown-menu" data-bs-theme="dark">
+                        <li><a class="dropdown-item text-white bg-dark" href="insert_casa.php">Casa</a></li>
+                        <li><a class="dropdown-item text-white bg-dark" href="#">Pilota</a></li>
+                        <li><a class="dropdown-item text-white bg-dark" href="#">Gara</a></li>
+                        <li><a class="dropdown-item text-white bg-dark" href="#">Partecipazioni</a></li>
+                    </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
+                    <a class="nav-link" href="#">Visualizza dati</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Ordine Arrivo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Aggiorna classifica</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Classifica piloti</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Classifica case</a>
                 </li>
             </ul>
         </div>
