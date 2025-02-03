@@ -38,7 +38,7 @@ require 'header.php';
                         <div class="card shadow-sm bg-black text-white border border-2 border-white">
                             <div class="card-body">
                                 <h5 class="card-title">Gare</h5>
-                                <a href="insert_casa.php" class="btn btn-primary"><i class="bi bi-plus-circle"></i>Inserisci</a>
+                                <a href="insert_gare.php" class="btn btn-primary"><i class="bi bi-plus-circle"></i>Inserisci</a>
                             </div>
                         </div>
                     </div>
@@ -48,7 +48,7 @@ require 'header.php';
                         <div class="card shadow-sm bg-black text-white border border-2 border-white">
                             <div class="card-body">
                                 <h5 class="card-title">Partecipazioni</h5>
-                                <a href="insert_casa.php" class="btn btn-primary"><i class="bi bi-plus-circle"></i>Inserisci</a>
+                                <a href="insert_partecipazioni.php" class="btn btn-primary"><i class="bi bi-plus-circle"></i>Inserisci</a>
                             </div>
                         </div>
                     </div>

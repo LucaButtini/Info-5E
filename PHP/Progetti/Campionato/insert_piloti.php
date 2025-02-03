@@ -1,7 +1,7 @@
 <?php
 
 
-$title= 'Case automobilistiche';
+$title= 'Piloti';
 require 'header.php';
 
 require 'Dbconnection.php';
@@ -65,12 +65,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             <label for="punteggio" class="form-label">Inserisci Punteggio:</label>
             <input type="number" class="form-control" id="punteggio" name= "punteggio" placeholder="Punteggio" min="0" required>
         </div>
+        <div class="mb-4">
+            <label for="nome_casa" class="form-label">Inserisci Nome Casa:</label>
+            <input type="text" class="form-control" id="nome_casa" name= "nome_casa" placeholder="Nome Casa" required>
+        </div>
 
-        <button type="submit" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Aggiungi Casa</button>
+        <button type="submit" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Aggiungi Pilota</button>
     </form>
 </div>
 
-</div>
 <?php
 require 'footer.php';
 ?>
