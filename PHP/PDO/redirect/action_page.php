@@ -6,5 +6,5 @@ $fname= $_POST['fname'];
 
 header('Location: confirm.html'); //redirect
 
-/*include('confirm_page.html');
+/*include('confirm.html');
 exit();*/ //non usiamo questo
