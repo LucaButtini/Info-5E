@@ -23,33 +23,16 @@ $page = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Home</a>
+                    <a class="nav-link <?= $page == 'index.php' ? 'active':''; ?>" href="index.php">Home</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Inserimento
-                    </a>
-                    <ul class="dropdown-menu" data-bs-theme="dark">
-                        <li><a class="dropdown-item text-white bg-dark" href="insert_casa.php">Casa</a></li>
-                        <li><a class="dropdown-item text-white bg-dark" href="#">Pilota</a></li>
-                        <li><a class="dropdown-item text-white bg-dark" href="#">Gara</a></li>
-                        <li><a class="dropdown-item text-white bg-dark" href="#">Partecipazioni</a></li>
-                    </ul>
+                    <a class="nav-link <?= $page == 'iscrizione.php' ? 'active':''; ?>" href="iscrizione.php">Inserimento</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Visualizza dati</a>
+                    <a class="nav-link <?= $page == 'visualizza.php' ? 'active':''; ?>" href="visualizza.php">Visualizza dati</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Ordine Arrivo</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Aggiorna classifica</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Classifica piloti</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Classifica case</a>
+                    <a class="nav-link <?= $page == 'risultati.php' ? 'active':''; ?>" href="#">Risultati</a>
                 </li>
             </ul>
         </div>

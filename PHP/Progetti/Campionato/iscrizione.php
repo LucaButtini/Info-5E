@@ -13,7 +13,7 @@ require 'header.php';
         </div>
 
         <div class="container my-5">
-            <h3 class="text-center mb-4">Inserisci i dati riguardanti il campionato.</h3>
+            <h3 class="text-center mb-4">Inserisci i dati riguardanti il campionato:</h3>
             <div class="row text-center">
                 <div class="col-12 mb-4">
                     <div class="card shadow-sm bg-black text-white border border-2 border-white">

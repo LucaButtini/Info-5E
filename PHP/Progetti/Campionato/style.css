@@ -9,3 +9,17 @@
     height: 40%;
     border: white solid 2px;
 }
+
+
+.custom-card {
+    max-width: 700px; /* Card più grande */
+    margin: 0 auto; /* Centrare la card */
+    text-align: center;
+}
+
+.custom-img {
+    width: 100%; /* L'immagine si adatta alla card */
+    height: auto; /* Mantiene le proporzioni */
+    border-radius: 10px; /* Smussa gli angoli dell'immagine */
+}
+
