@@ -32,7 +32,7 @@ $page = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
                     <a class="nav-link <?= ($page == 'visualizza.php' || $page == 'classifica_piloti.php' || $page == 'classifica_case.php') ? 'active' : ''; ?>" href="visualizza.php">Classifica generale</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= $page == 'aggiorna.php' ? 'active':''; ?>" href="#">Modifica classifica</a>
+                    <a class="nav-link <?= $page == 'update.php' ? 'active':''; ?>" href="update.php">Modifica classifica</a>
                 </li>
             </ul>
         </div>
