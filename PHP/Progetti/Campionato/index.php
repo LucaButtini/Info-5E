@@ -1,5 +1,6 @@
 <?php
 
+$title= 'Campionato';
 
 require 'header.php';
 ?>

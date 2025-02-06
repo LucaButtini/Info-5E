@@ -1,5 +1,6 @@
 <?php
 
+$title= 'Visualizza';
 
 require 'header.php';
 
@@ -10,8 +11,7 @@ require 'header.php';
     <div class="text-center">
         <h1 class="text-primary"><strong>CAMPIONATO AUTOMOBILISTICO</strong></h1>
     </div>
-
-    <div>
+    <div class="my-5">
         <h3 class="text-center mb-4">Visualizza le informazioni sul campionato:</h3>
         <div class="card custom-card bg-black border border-2 border-white text-white mt-4">
             <img src="Immagini/img1.webp" class="card-img-top custom-img">

@@ -1,4 +1,6 @@
 <?php
+
+$title = 'Classifica piloti';
 require 'Dbconnection.php';
 $config = require('db_config.php');
 $db = Dbconnection::getDb($config);

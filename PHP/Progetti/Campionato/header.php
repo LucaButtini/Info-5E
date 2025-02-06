@@ -10,7 +10,7 @@ $page = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
-    <title>Campionato</title>
+    <title><?=/**@var $title*/ $title?></title>
 </head>
 <body class="bg-black">
 
@@ -29,10 +29,10 @@ $page = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
                     <a class="nav-link <?= $page == 'iscrizione.php' ? 'active':''; ?>" href="iscrizione.php">Inserimento</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= $page == 'visualizza.php' ? 'active':''; ?>" href="visualizza.php">Visualizza dati</a>
+                    <a class="nav-link <?= ($page == 'visualizza.php' || $page == 'classifica_piloti.php' || $page == 'classifica_case.php') ? 'active' : ''; ?>" href="visualizza.php">Classifica generale</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= $page == 'risultati.php' ? 'active':''; ?>" href="#">Risultati</a>
+                    <a class="nav-link <?= $page == 'aggiorna.php' ? 'active':''; ?>" href="#">Modifica classifica</a>
                 </li>
             </ul>
         </div>

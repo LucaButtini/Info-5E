@@ -1,5 +1,6 @@
 <?php
 
+$title = 'Iscrizione';
 require 'Dbconnection.php';
 $config = require('db_config.php');
 $db = Dbconnection::getDb($config);
@@ -11,7 +12,6 @@ require 'header.php';
         <div class="text-center p-">
             <h1 class="text-primary"><strong>CAMPIONATO AUTOMOBILISTICO</strong></h1>
         </div>
-
         <div class="container my-5">
             <h3 class="text-center mb-4">Inserisci i dati riguardanti il campionato:</h3>
             <div class="row text-center">
