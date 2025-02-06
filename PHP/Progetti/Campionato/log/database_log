@@ -1,0 +1,36 @@
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'campionato.casa_automobilistica' doesn't exist---2025-02-06 09:13:40
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'campionato.casa_automobilistica' doesn't exist---2025-02-06 09:13:41
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'campionato.casa_automobilistica' doesn't exist---2025-02-06 09:13:41
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'campionato.casa_automobilistica' doesn't exist---2025-02-06 09:13:41
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'campionato.casa_automobilistica' doesn't exist---2025-02-06 09:13:41
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'campionato.casa_automobilistica' doesn't exist---2025-02-06 09:13:41
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'campionato.casa_automobilistiche' doesn't exist---2025-02-06 09:14:08
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'campionato.casa_automobilistiche' doesn't exist---2025-02-06 09:14:08
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'campionato.casa_automobilistiche' doesn't exist---2025-02-06 09:14:09
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'campionato.casa_automobilistiche' doesn't exist---2025-02-06 09:14:09
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'campionato.casa_automobilistiche' doesn't exist---2025-02-06 09:14:09
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'campionato.casa_automobilistiche' doesn't exist---2025-02-06 09:14:09
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'campionato.casa_automobilistiche' doesn't exist---2025-02-06 09:14:09
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'campionato.casa_automobilistiche' doesn't exist---2025-02-06 09:14:09
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'campionato.casa_automobilistiche' doesn't exist---2025-02-06 09:14:10
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'campionato.casa_automobilistiche' doesn't exist---2025-02-06 09:14:10
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'campionato.casa_automobilistiche' doesn't exist---2025-02-06 09:14:10
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'campionato.casa_automobilistiche' doesn't exist---2025-02-06 09:14:10
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.nome_casa' in 'field list'---2025-02-06 09:15:49
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.nome_casa' in 'field list'---2025-02-06 09:15:49
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.nome_casa' in 'field list'---2025-02-06 09:15:49
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.nome_casa' in 'field list'---2025-02-06 09:15:49
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.nome_casa' in 'field list'---2025-02-06 09:15:49
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.nome_casa' in 'field list'---2025-02-06 09:15:49
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.nome_casa' in 'field list'---2025-02-06 09:15:54
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.nome_casa' in 'field list'---2025-02-06 09:17:27
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.nome_casa' in 'field list'---2025-02-06 09:17:27
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.nome_casa' in 'field list'---2025-02-06 09:17:28
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.nome_casa' in 'field list'---2025-02-06 09:17:28
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.nome_casa' in 'field list'---2025-02-06 09:17:28
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.nome_casa' in 'field list'---2025-02-06 09:17:28
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.nome_casa' in 'field list'---2025-02-06 09:17:29
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.nome_casa' in 'field list'---2025-02-06 09:17:30
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.nome_casa' in 'field list'---2025-02-06 09:17:30
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.nome_casa' in 'field list'---2025-02-06 09:17:31
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.nome_casa' in 'field list'---2025-02-06 09:17:35

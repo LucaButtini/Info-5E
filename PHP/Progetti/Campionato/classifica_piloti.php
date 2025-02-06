@@ -6,9 +6,12 @@ $db = Dbconnection::getDb($config);
 require 'header.php';
 
 // Query per ottenere i dati della classifica piloti ordinati per punteggio
-$query = "SELECT p.numero, p.nome, p.cognome, p.nazionalita, p.punteggio, p.nome_casa 
-          FROM campionato.piloti p 
-          ORDER BY p.punteggio DESC;";
+$query = "SELECT p.numero, p.nome, p.cognome, p.nazionalita, p.punteggio, p.nome_casa, g.luogo, g.data
+          FROM campionato.piloti p
+          JOIN campionato.partecipare pa ON p.numero = pa.numero_pilota
+          JOIN campionato.gare g ON pa.id_gara = g.id_gara
+          ORDER BY p.punteggio DESC, g.data DESC;";
+
 
 try {
     $stm = $db->prepare($query);
@@ -22,8 +25,10 @@ try {
         echo "<td>" . htmlspecialchars($pilota->nazionalita) . "</td>";
         echo "<td>" . htmlspecialchars($pilota->nome_casa) . "</td>";
         echo "<td><strong>" . number_format($pilota->punteggio, 0, ',', '.') . "</strong></td>";
+        echo "<td>" . htmlspecialchars($pilota->luogo) . " (" . htmlspecialchars($pilota->data) . ")</td>";
         echo "</tr>";
     }
+
     $content = ob_get_contents();
     ob_end_clean();
 
@@ -41,14 +46,15 @@ try {
 
     <h3 class="text-center mb-4">Classifica Piloti</h3>
     <div class="table-responsive mt-4">
-        <table class="table table-striped table-bordered text-center">
-            <thead class="table-dark">
-            <tr>
-                <th>Numero</th>
-                <th>Pilota</th>
-                <th>Nazionalità</th>
-                <th>Nome casa</th>
-                <th>Punteggio</th>
+        <table class="table table-dark table-striped table-hover table-bordered text-center">
+            <thead style="background-color: #212529; border-bottom: 3px solid #0d6efd;">
+            <tr class="text-primary fw-bold">
+                <th>NUMERO</th>
+                <th>PILOTA</th>
+                <th>NAZIONALITÁ</th>
+                <th>NOME CASA</th>
+                <th>PUNTEGGIO</th>
+                <th>GARA (LUOGO E DATA)</th>
             </tr>
             </thead>
             <tbody>
@@ -57,6 +63,7 @@ try {
         </table>
     </div>
 </div>
+
 
 <?php
 require 'footer.php';

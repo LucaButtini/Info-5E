@@ -24,7 +24,7 @@ require 'header.php';
             <img src="Immagini/img2.webp" class="card-img-top custom-img">
             <div class="card-body">
                 <h5 class="card-title">Classifica case automobilistiche</h5>
-                <a href="classifica_gare.php" class="btn btn-primary"><i class="bi bi-plus-circle"></i>Visualizza</a>
+                <a href="classifica_case.php" class="btn btn-primary"><i class="bi bi-plus-circle"></i>Visualizza</a>
             </div>
         </div>
     </div>
