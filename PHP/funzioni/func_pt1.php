@@ -113,3 +113,4 @@ $multiply = function(int $a, int $b): int {
     return $a * $b; // Ritorna il prodotto di due numeri.
 };
 echo $multiply(4, 5) . "<br>"; // Output: 20
+
