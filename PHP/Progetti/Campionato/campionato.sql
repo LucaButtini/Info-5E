@@ -34,7 +34,3 @@ foreign key (numero_pilota) references campionato.piloti(numero),
 foreign key (id_gara) references campionato.gare(id_gara)
 );
 
-
-
-drop table campionato.case_automobilistiche;
-drop table campionato.piloti;
