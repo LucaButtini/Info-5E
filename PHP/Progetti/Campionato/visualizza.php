@@ -27,6 +27,13 @@ require 'header.php';
                 <a href="classifica_case.php" class="btn btn-primary"><i class="bi bi-plus-circle"></i>Visualizza</a>
             </div>
         </div>
+        <div class="card custom-card bg-black border border-2 border-white text-white mt-4">
+            <img src="Immagini/img3.webp" class="card-img-top custom-img">
+            <div class="card-body">
+                <h5 class="card-title">Classifica Gare</h5>
+                <a href="classifica_gare.php" class="btn btn-primary"><i class="bi bi-plus-circle"></i>Visualizza</a>
+            </div>
+        </div>
     </div>
 </div>
 
