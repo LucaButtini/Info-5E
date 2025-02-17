@@ -18,7 +18,7 @@ Il get ha la query string, che manda in chiaro e si vedono nell'url del server
 
 setcookie('user', $_GET['fname']);
 
-setCookie('u')
+setCookie('bg-color', $_GET['color']);
 
 $fname= $_GET['fname'];
 $lname= $_GET['lname'];

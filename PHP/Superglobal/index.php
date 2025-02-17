@@ -21,6 +21,10 @@ if(isset($_COOKIE['user']))
 else
     $name='ciao';
 
+if(isset($_COOKIE['bg-color']))
+    $bgColor= $_COOKIE['bg-color'];
+else
+    $bgColor='white';
 ?>
 
 <!doctype html>
@@ -32,7 +36,7 @@ else
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-<body>
+<body style="background-color: <?= $bgColor ?>;">
     <h1>ciao <?=$name?></h1>
         <form action="action_page.php" method="get">
             <label for="fname">First name:</label><br>
@@ -43,9 +47,10 @@ else
             <input type="password" id="pass" name="pass"><br><br>
             <label for="colors">Select your color</label>
             <br><br>
-            <select id = "colors" name="colors">
-                <option value="volvo">Yellow</option>
-                <option value="mazda">Red</option>
+            <select id = "colors" name="color">
+                <option value="yellow">Yellow</option>
+                <option value="red">Red</option>
+                <option value="blue">Blue</option>
             </select>
             <input type="submit" value="Submit">
         </form>
