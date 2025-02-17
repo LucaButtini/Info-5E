@@ -1,9 +1,7 @@
 <?php
 
-//variabile superglobal. Definita da php disponibile in tutti gli script
 
-$fname= $_GET['fname'];
-$lname= $_GET['lname'];
+
 
 /*$fname= $_POST['fname'];
 $lname= $_POST['lname'];*/
@@ -12,5 +10,19 @@ $lname= $_POST['lname'];*/
 Il get ha la query string, che manda in chiaro e si vedono nell'url del server
 
 */
+
+//------------------------------------------------------------------------------------------------------------------------
+
+/*ora voglio settare un cookie*/
+// ogni coppia ha chiave-valore
+
+setcookie('user', $_GET['fname']);
+
+setCookie('u')
+
+$fname= $_GET['fname'];
+$lname= $_GET['lname'];
 echo $fname.'<br>';
-echo $lname;
+echo $lname.'<br>';
+
+

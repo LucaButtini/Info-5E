@@ -1,4 +1,26 @@
 <?php
+/*variabile superglobal.
+/ Una superglobal è una variabie definita da php disponibile in tutti gli script
+Si usano per la gestione dei dati.
+oltre a _POST e _GET c'è _SERVER.
+
+_COOKIE è un file di testo che contiene le informazioni che il server da al client.
+Il browser la salva nella memoria locale. Subito dopo con la richiesta successiva,
+il cookie è nell'header verso il server.
+Questo è usato dato che l'http è stateless (non ha memoria), quindi per memorizzare alcune informazioni usa il client per salvare.
+Le informazioni che ci sono in un cookie sono le preferenze dell'utente
+
+
+    */
+//var_dump($_SERVER);
+
+//echo $_SERVER['SERVER_PROTOCOL'];
+
+if(isset($_COOKIE['user']))
+    $name= $_COOKIE['user'];
+else
+    $name='ciao';
+
 ?>
 
 <!doctype html>
@@ -11,6 +33,7 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>ciao <?=$name?></h1>
         <form action="action_page.php" method="get">
             <label for="fname">First name:</label><br>
             <input type="text" id="fname" name="fname" value="luca"><br>
@@ -18,6 +41,12 @@
             <input type="text" id="lname" name="lname" value="buts"><br><br>
             <label for="pass">password:</label><br>
             <input type="password" id="pass" name="pass"><br><br>
+            <label for="colors">Select your color</label>
+            <br><br>
+            <select id = "colors" name="colors">
+                <option value="volvo">Yellow</option>
+                <option value="mazda">Red</option>
+            </select>
             <input type="submit" value="Submit">
         </form>
 </body>
