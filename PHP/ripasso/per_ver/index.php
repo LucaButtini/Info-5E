@@ -29,7 +29,7 @@ $num= count($albums);
         <label for="email">Inserisci email:</label><br>
         <input type="email" required placeholder="nome@dominio.com" name="email" id="email"><br><br>
 
-        <!--creo i dropdown per la quantita di prodotti-->
+        <!--creo i dropdown per la tipo di prodotti-->
         <?php
         //ciclo l'array
         for($i=0; $i<$num; $i++) { ?>
