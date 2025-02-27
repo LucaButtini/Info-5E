@@ -1,8 +1,6 @@
 <?php
 $nazioni= require_once 'azienda.php';
 
-$num= count($nazioni);
-
 
 if($_SERVER['REQUEST_METHOD']=='POST'){
     $nome = $_POST['nome']??null;
