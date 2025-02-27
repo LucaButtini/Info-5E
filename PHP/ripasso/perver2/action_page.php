@@ -14,16 +14,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $spagna=$_POST['spagna']??null;
     $germania=$_POST['germania']??null;
     $inghilterra=$_POST['inghilterra']??null;
-    $statiUniti=$_POST['stati uniti']??null;
-
-    if(empty($nome) || empty($citta) || empty($indirizzo) || empty($num_tel) || empty($naz) || empty($spagna) || empty($germania) || empty($inghilterra) || empty($statiUniti)){
-        echo 'devi inserire tutti i dati';
-        exit;
-    }
-
-    $raggruppamento=[];
-
-
+    $statiUniti=$_POST['usa']??null;
 
 
 
@@ -59,5 +50,25 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     <?php for($i=0; $i<count($naz); $i++) {?>
         <p><?= $naz[$i]?></p>
     <?php } ?>
+
+    <h2>Numero sedi</h2>
+    <?php
+
+    $numeriNaz = [
+        'francia' => $francia,
+        'spagna' => $spagna,
+        'germania' => $germania,
+        'inghilterra' => $inghilterra,
+        'usa' => $statiUniti
+    ];
+
+    foreach ($numeriNaz as $nazione => $numero) {
+        if ($numero > 0) { // Stampa solo se il numero è maggiore di 0
+            echo "<p>$nazione: $numero sedi</p>";
+        }
+    }
+    ?>
+
+
 </body>
 </html>
