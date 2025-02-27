@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'Francia',
-    'Spagna',
-    'Germania',
-    'Inghilterra',
-    'Stati Uniti'
+    'francia' => 'Francia',
+    'spagna' => 'Spagna',
+    'germania' => 'Germania',
+    'inghilterra' => 'Inghilterra',
+    'usa' => 'Stati Uniti'
 ];

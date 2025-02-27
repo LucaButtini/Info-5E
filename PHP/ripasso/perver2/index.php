@@ -1,11 +1,7 @@
 <?php
-
-/*$nazioni= require_once 'azienda.php';
-
-$num= count($nazioni);*/
+$nazioni = require_once 'azienda.php'; // Carica le nazioni
 
 ?>
-
 
 <!doctype html>
 <html lang="en">
@@ -29,25 +25,18 @@ $num= count($nazioni);*/
     <label for="numero">Numero telefono</label><br>
     <input type="text" id="numero" name="numero" placeholder="+39 00000000" required><br><br>
 
-    <!-- checkbox-->
+    <!-- checkbox per le nazioni -->
     <label for="naz">Scegli le nazioni estere con cui l'azienda collabora (max 4):</label><br>
-    <input type="checkbox" id="naz" name="naz[]" value="francia">Francia<br>
-    <input type="checkbox" id="naz" name="naz[]" value="spagna">Spagna<br>
-    <input type="checkbox" id="naz" name="naz[]" value="germania">Germania<br>
-    <input type="checkbox" id="naz" name="naz[]" value="inghilterra">Inghilterra<br>
-    <input type="checkbox" id="naz" name="naz[]" value="usa">Stati Uniti<br><br>
+    <?php foreach ($nazioni as $key => $nazione) { ?>
+        <input type="checkbox" id="naz" name="naz[]" value="<?= $key ?>"> <?= $nazione ?><br>
+    <?php } ?>
+    <br>
 
-
-    <label for="francia">Numero aziende in Francia</label><br>
-    <input type="number" id="francia" name="francia" min="0" value="0" required><br>
-    <label for="spagna">Numero aziende in Spagna</label><br>
-    <input type="number" id="spagna" name="spagna" min="0" value="0" required><br>
-    <label for="germania">Numero aziende in Germania</label><br>
-    <input type="number" id="germania" name="germania" min="0" value="0" required><br>
-    <label for="inghilterra">Numero aziende in Inghilterra</label><br>
-    <input type="number" id="inghilterra" name="inghilterra" min="0" value="0" required><br>
-    <label for="usa">Numero aziende in Stati Uniti</label><br>
-    <input type="number" id="usa" name="usa" min="0" value="0" required><br><br>
+    <!-- Numeri aziende -->
+    <?php foreach ($nazioni as $key => $nazione) { ?>
+        <label for="<?= $key ?>"><?= "Numero aziende in $nazione" ?></label><br>
+        <input type="number" id="<?= $key ?>" name="<?= $key ?>" min="0" value="0" required><br>
+    <?php } ?>
 
     <input type="submit" value="invia i dati">
 </form>
