@@ -10,11 +10,11 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $indirizzo = $_POST['indirizzo']??null;
     $num_tel=$_POST['numero']??null;
     $naz=$_POST['naz']??[];
-    $francia=$_POST['francia']??null;
-    $spagna=$_POST['spagna']??null;
-    $germania=$_POST['germania']??null;
-    $inghilterra=$_POST['inghilterra']??null;
-    $statiUniti=$_POST['usa']??null;
+    $Nfrancia=$_POST['francia']??null;
+    $Nspagna=$_POST['spagna']??null;
+    $Ngermania=$_POST['germania']??null;
+    $Ninghilterra=$_POST['inghilterra']??null;
+    $NstatiUniti=$_POST['usa']??null;
 
 
 
@@ -55,11 +55,11 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     <?php
 
     $numeriNaz = [
-        'francia' => $francia,
-        'spagna' => $spagna,
-        'germania' => $germania,
-        'inghilterra' => $inghilterra,
-        'usa' => $statiUniti
+        'francia' => $Nfrancia,
+        'spagna' => $Nspagna,
+        'germania' => $Ngermania,
+        'inghilterra' => $Ninghilterra,
+        'usa' => $NstatiUniti
     ];
 
     foreach ($numeriNaz as $nazione => $numero) {
