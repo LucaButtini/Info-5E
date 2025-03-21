@@ -1,5 +1,8 @@
 <?php
-session_start();
+/*var_dump(session_get_cookie_params());
+die();*/
+if(session_status()==PHP_SESSION_NONE)
+    session_start();
 $materia= $_SESSION['materia'];
 $scuola= $_SESSION['scuola'];
 
@@ -15,6 +18,11 @@ $scuola= $_SESSION['scuola'];
     <title>Document</title>
 </head>
 <body>
-    <p>La scuola è <?= $scuola?> e la materia è <?= $materia?></p>
+    <h3>La scuola è <?= $scuola?> e la materia è <?= $materia?></h3>
+    <br>
+    <!--Nome -->
+    <p><?= session_name()?></p>
+    <!--value -->
+    <p><?= $_COOKIE[session_name()]?></p>
 </body>
 </html>
