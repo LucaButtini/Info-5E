@@ -20,9 +20,11 @@ $scuola= $_SESSION['scuola'];
 <body>
     <h3>La scuola è <?= $scuola?> e la materia è <?= $materia?></h3>
     <br>
-    <!--Nome -->
+    <!--Nome è session id-->
     <p><?= session_name()?></p>
     <!--value -->
     <p><?= $_COOKIE[session_name()]?></p>
+
+    <a href="logout.php">logout</a>
 </body>
 </html>
