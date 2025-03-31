@@ -28,13 +28,10 @@ $page = basename($_SERVER["SCRIPT_NAME"]);
                     <a class="nav-link <?= $page == 'index.php' ? 'active' : '' ?>" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= $page == 'insert_clienti.php' ? 'active' : '' ?>" href="insert_clienti.php">Inserimento Cliente</a>
+                    <a class="nav-link <?= $page == 'insert_clienti.php' ? 'active' : '' ?>" href="prodotti.php">Prodotti</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= $page == 'insert_destinatari.php' ? 'active' : '' ?>" href="insert_destinatari.php">Inserimento Destinatari</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?= $page == 'insert_plichi.php' ? 'active' : '' ?>" href="insert_plichi.php">Inserimento Plico</a>
+                    <a class="nav-link <?= $page == 'insert_clienti.php' ? 'active' : '' ?>" href="insert_prodotti.php">Inserisci Prodotti</a>
                 </li>
             </ul>
 
@@ -56,7 +53,7 @@ $page = basename($_SERVER["SCRIPT_NAME"]);
     </div>
 </nav>
 
-<div class="container mt-5 text-center rounded-4 flex-grow-1">
+<div class="container mt-5 text-center rounded-4 flex-grow-1 bg-secondary-subtle">
 
 
 
