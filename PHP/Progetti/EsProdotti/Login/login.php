@@ -9,20 +9,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email']);
     $password = $_POST['password'];
 
-
     $query = "SELECT * FROM utenti WHERE email = :email";
     $stmt = $db->prepare($query);
 
-
     $stmt->bindValue(':email', $email);
-
     $stmt->execute();
     $user = $stmt->fetch();
 
-    // Verifica la password
-    if ($user && password_verify($password, $user['password'])) {
-        $_SESSION['user'] = $user['email'];
-        $_SESSION['ruolo'] = $user['ruolo'];
+    // Verifica la password utilizzando la notazione a freccia
+    if ($user && password_verify($password, $user->password)) {
+        $_SESSION['user'] = $user->email;
+        $_SESSION['ruolo'] = $user->ruolo;
 
         header("Location: ../index.php");
         exit;
