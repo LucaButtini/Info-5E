@@ -3,6 +3,12 @@ ob_start();
 session_start();
 
 $page = basename($_SERVER["SCRIPT_NAME"]);
+$displayName = "";
+if (isset($_SESSION['user'])) {
+    // Estrae la parte prima della "@" come nome utente
+    $pos = strpos($_SESSION['user'], '@');
+    $displayName = $pos !== false ? substr($_SESSION['user'], 0, $pos) : $_SESSION['user'];
+}
 ?>
 <!doctype html>
 <html lang="it">
@@ -28,21 +34,19 @@ $page = basename($_SERVER["SCRIPT_NAME"]);
                     <a class="nav-link <?= $page == 'index.php' ? 'active' : '' ?>" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= $page == 'insert_clienti.php' ? 'active' : '' ?>" href="prodotti.php">Prodotti</a>
+                    <a class="nav-link <?= $page == 'prodotti.php' ? 'active' : '' ?>" href="prodotti.php">Prodotti</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= $page == 'insert_clienti.php' ? 'active' : '' ?>" href="insert_prodotti.php">Inserisci Prodotti</a>
+                    <a class="nav-link <?= $page == 'insert_prodotti.php' ? 'active' : '' ?>" href="insert_prodotti.php">Inserisci Prodotti</a>
                 </li>
             </ul>
 
-            <?php if (isset($_SESSION['user_nome'])){ ?>
+            <?php if (isset($_SESSION['user'])) { ?>
                 <div class="dropdown">
                     <button class="btn btn-light dropdown-toggle" type="button" id="userMenu" data-bs-toggle="dropdown">
-                        <i class="bi bi-person-circle"></i> <?= $_SESSION['user_nome'] ?>
+                        <i class="bi bi-person-circle"></i> <?= $displayName ?>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="Login/impostazioni.php"><i class="bi bi-gear-fill"></i> Impostazioni</a></li>
-                        <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item text-danger" href="Login/logout.php"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
                     </ul>
                 </div>
@@ -54,6 +58,4 @@ $page = basename($_SERVER["SCRIPT_NAME"]);
 </nav>
 
 <div class="container mt-5 text-center rounded-4 flex-grow-1 bg-secondary-subtle">
-
-
-
+    <!-- Contenuto della pagina -->
