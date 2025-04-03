@@ -1,5 +1,6 @@
 <?php
-// Impostiamo il lifetime della sessione a 10 secondi per il test
+$citta = require_once 'cities.php';
+
 if (session_status() == PHP_SESSION_NONE) {
     session_set_cookie_params([
         'lifetime' => 60, // Impostiamo il lifetime a 10 secondi
@@ -32,11 +33,10 @@ if (!isset($_SESSION['start_time'])) {
 
 <form action="action.php" method="post">
     <?php
-    $citta = require_once 'cities.php';
     foreach ($citta as $city) { ?>
         <div>
             <label for="<?= $city ?>"><?= $city ?></label><br>
-            <input type="number" name="votes[<?= $city ?>]" id="<?= $city ?>" min="1" max="5" step="1" value="1">
+            <input type="number" name="votes[<?= $city ?>]" id="votes[<?= $city ?>]?>" min="1" max="5" step="1" value="1">
             <br>
         </div>
     <?php } ?>
