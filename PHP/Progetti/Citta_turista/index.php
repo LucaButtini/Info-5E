@@ -2,7 +2,7 @@
 // Impostiamo il lifetime della sessione a 10 secondi per il test
 if (session_status() == PHP_SESSION_NONE) {
     session_set_cookie_params([
-        'lifetime' => 10, // Impostiamo il lifetime a 10 secondi
+        'lifetime' => 60, // Impostiamo il lifetime a 10 secondi
         'path' => '/',
         'domain' => '',
         'secure' => false,
@@ -11,34 +11,12 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Impostiamo un orario di inizio se non esiste già
+//ora di inizio
 if (!isset($_SESSION['start_time'])) {
     $_SESSION['start_time'] = time();
 }
 
-// Se sono passati più di 10 secondi dalla sessione di inizio, la sessione è scaduta
-if (time() - $_SESSION['start_time'] > 10) {
-    session_unset();
-    session_destroy();
-    ?>
-    <!doctype html>
-    <html lang="it">
-    <head>
-        <meta charset="UTF-8">
-        <title>Sessione Scaduta</title>
-    </head>
-    <body>
-    <h2>Sessione scaduta</h2>
-    <p>Il tempo per l'inserimento dei dati è scaduto.</p>
-    <p><a href="index.php">Ricarica la pagina per iniziare di nuovo</a></p>
-    </body>
-    </html>
-    <?php
-    exit;
-}
 
-// Aggiorna il tempo ogni volta che la pagina viene ricaricata
-$_SESSION['start_time'] = time();
 ?>
 
 <!doctype html>

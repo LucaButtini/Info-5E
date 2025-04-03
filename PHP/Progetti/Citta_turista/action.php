@@ -1,5 +1,31 @@
 <?php
-// Controllo se i dati sono stati inviati correttamente
+// Avvia la sessione se non è già avviata
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Controlla se il tempo di inizio della sessione è impostato e se sono trascorsi più di 60 secondi
+if (!isset($_SESSION['start_time']) || (time() - $_SESSION['start_time'] > 60)) {
+    session_unset();
+    session_destroy();
+    ?>
+    <!doctype html>
+    <html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <title>Sessione Scaduta</title>
+    </head>
+    <body>
+    <h2>Sessione scaduta</h2>
+    <p>Il tempo per l'inserimento dei dati è scaduto.</p>
+    <p><a href="index.php">Ricarica la pagina per iniziare di nuovo</a></p>
+    </body>
+    </html>
+    <?php
+    exit;
+}
+
+// Se i dati non sono stati inviati correttamente, mostra un messaggio di errore
 if (!isset($_POST['votes']) || !is_array($_POST['votes'])) { ?>
     <p>Errore nei dati ricevuti. <a href="index.php">Torna al form</a></p>
     <?php exit;
