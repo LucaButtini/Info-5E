@@ -3,12 +3,8 @@ ob_start();
 session_start();
 
 $page = basename($_SERVER["SCRIPT_NAME"]);
-$displayName = "";
-if (isset($_SESSION['user'])) {
-    // Estrae la parte prima della "@" come nome utente
-    $pos = strpos($_SESSION['user'], '@');
-    $displayName = $pos !== false ? substr($_SESSION['user'], 0, $pos) : $_SESSION['user'];
-}
+
+
 ?>
 <!doctype html>
 <html lang="it">
@@ -36,26 +32,26 @@ if (isset($_SESSION['user'])) {
                 <li class="nav-item">
                     <a class="nav-link <?= $page == 'prodotti.php' ? 'active' : '' ?>" href="prodotti.php">Prodotti</a>
                 </li>
+                <?php  ?>
                 <li class="nav-item">
                     <a class="nav-link <?= $page == 'insert_prodotti.php' ? 'active' : '' ?>" href="insert_prodotti.php">Inserisci Prodotti</a>
                 </li>
             </ul>
 
-            <?php if (isset($_SESSION['user'])) { ?>
+            <?php if(isset($_SESSION['user'])){ ?>
                 <div class="dropdown">
                     <button class="btn btn-light dropdown-toggle" type="button" id="userMenu" data-bs-toggle="dropdown">
-                        <i class="bi bi-person-circle"></i> <?= $displayName ?>
+                        <i class="bi bi-person-circle"></i> <?= $_SESSION['user'] ?>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item text-danger" href="Login/logout.php"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
                     </ul>
                 </div>
             <?php } else { ?>
-                <a class="nav-link text-light" href="Login/login.php"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+                <a class="nav-link text-light" href="Login/loginUtente.php"><i class="bi bi-box-arrow-in-right"></i> Login</a>
             <?php } ?>
         </div>
     </div>
 </nav>
 
 <div class="container mt-5 text-center rounded-4 flex-grow-1 bg-secondary-subtle">
-    <!-- Contenuto della pagina -->

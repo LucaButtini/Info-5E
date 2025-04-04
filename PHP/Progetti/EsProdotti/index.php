@@ -1,5 +1,5 @@
 <?php
-$title= 'Home Page';
+$title= 'Home Elettronica';
 require './Template/header.php';
 
 ?>
