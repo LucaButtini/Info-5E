@@ -66,7 +66,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </form>
 
     <p class="text-center mt-3">
-        Non hai un account? <a href="registrazione.php">Registrati</a>
+        Non hai un account? <br><a href="registrazione.php">Registrati</a>
+    </p>
+    <p class="text-center mt-1">
+        Sei un amministratore? <br><a href="registrazione.php">Accedi al tuo account</a>
     </p>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
