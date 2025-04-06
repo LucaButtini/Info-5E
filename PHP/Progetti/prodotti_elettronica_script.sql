@@ -11,12 +11,12 @@ create table prodotti(
 );
 
 create table amministratori(
-                               email varchar(150) primary key,
+                               username varchar(50) primary key,
+                               email varchar(150),
                                password varchar(255)
 );
 
 
-insert into amministratori (username, email, password)
 
 CREATE TABLE utenti (
                         username varchar(50) primary key,

@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body class="bg-light d-flex justify-content-center align-items-center vh-100">
 
 <div class="card p-4 shadow" style="width: 350px;">
-    <h2 class="text-center text-primary mb-4">Registrati</h2>
+    <h2 class="text-center text-primary mb-4">Registrazione Utente</h2>
 
     <?php if (isset($error)) { ?>
         <div class="alert alert-danger"><?= $error; ?></div>
