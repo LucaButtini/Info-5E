@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Verifica della password
     if ($admin && password_verify($password, $admin->password)) {
-        $_SESSION['admin'] = $email;
+        $_SESSION['admin'] = $username;
         header("Location: ../index.php");
         exit;
     } else {
