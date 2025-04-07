@@ -13,7 +13,7 @@ $page = basename($_SERVER["SCRIPT_NAME"]);
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <title><?= $title ?></title>
+    <title><?= /**@var $title */ $title?></title>
 </head>
 <body class="d-flex flex-column min-vh-100">
 
@@ -28,9 +28,11 @@ $page = basename($_SERVER["SCRIPT_NAME"]);
                 <li class="nav-item">
                     <a class="nav-link <?= $page == 'index.php' ? 'active' : '' ?>" href="index.php">Home</a>
                 </li>
+                <?php if (isset($_SESSION['user']) || isset($_SESSION['admin'])) { ?>
                 <li class="nav-item">
-                    <a class="nav-link <?= $page == 'prodotti.php' ? 'active' : '' ?>" href="prodotti.php">Prodotti</a>
+                    <a class="nav-link <?= $page == 'prodotti.php' ? 'active' : '' ?>" href="prodotti.php">Visualizza Prodotti</a>
                 </li>
+                <?php } ?>
                 <?php if (isset($_SESSION['admin'])) { ?>
                     <li class="nav-item">
                         <a class="nav-link <?= $page == 'inserisci.php' ? 'active' : '' ?>" href="inserisci.php">Inserisci Prodotti</a>

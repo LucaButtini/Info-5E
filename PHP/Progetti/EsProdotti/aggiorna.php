@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </div>
 
 <div class="container" style="max-width: 500px">
-    <form method="post" action="">
+    <form method="post" action="aggiorna.php">
         <div class="mb-4">
             <label for="codice" class="form-label">Codice:</label>
             <input type="text" class="form-control" id="codice" name="codice" placeholder="Codice" required>

@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $descrizione = $_POST['descrizione'];
     $costo = $_POST['costo'];
     $quantita = $_POST['quantita'];
-    $data_produzione = $_POST['data_produzione'];
+    $data_produzione = $_POST['data'];
 
 
     $checkQuery = "SELECT * FROM prodotti WHERE codice = :codice";
@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ?>
-    <!-- Form di inserimento dati cliente -->
+
     <div class="text-center">
         <h1 class="text-primary"><strong>Inserisci Nuovo Prodottop</strong></h1>
         <p class="lead">Compila il form per inserire le caratteristiche del prodotto</p>
