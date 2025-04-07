@@ -33,7 +33,7 @@ $page = basename($_SERVER["SCRIPT_NAME"]);
                 </li>
                 <?php if (isset($_SESSION['admin'])) { ?>
                     <li class="nav-item">
-                        <a class="nav-link <?= $page == 'insert_prodotti.php' ? 'active' : '' ?>" href="insert_prodotti.php">Inserisci Prodotti</a>
+                        <a class="nav-link <?= $page == 'inserisci.php' ? 'active' : '' ?>" href="inserisci.php">Inserisci Prodotti</a>
                     </li>
                 <?php } ?>
             </ul>
