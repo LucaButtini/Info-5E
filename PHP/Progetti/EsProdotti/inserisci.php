@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $prodEsistente = $checkStmt->fetch();
 
     if ($prodEsistente) {
-        // Se il cliente è già registrato, mostra un messaggio informativo
+
         echo "<div class='container mt-5'><h3 class='text-danger'>Prodotto con questi codice già esistente!</h3></div>";
     } else {
         // Inserimento del nuovo cliente
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input type="date" class="form-control" id="data" name="data" placeholder="Data Produzione" required>
         </div>
 
-        <button type="submit" class="btn btn-dark"><i class="bi bi-plus-circle"></i> Aggiungi Cliente</button>
+        <button type="submit" class="btn btn-dark"><i class="bi bi-plus-circle"></i> Aggiungi Prodotto</button>
     </form>
 
 

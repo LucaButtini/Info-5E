@@ -35,6 +35,12 @@ $page = basename($_SERVER["SCRIPT_NAME"]);
                     <li class="nav-item">
                         <a class="nav-link <?= $page == 'inserisci.php' ? 'active' : '' ?>" href="inserisci.php">Inserisci Prodotti</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?= $page == 'aggiorna.php' ? 'active' : '' ?>" href="aggiorna.php">Aggiorna Prezzo Prodotti</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?= $page == 'rimuovi.php' ? 'active' : '' ?>" href="rimuovi.php">Elimina Prodotti</a>
+                    </li>
                 <?php } ?>
             </ul>
 
