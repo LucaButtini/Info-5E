@@ -1,6 +1,6 @@
-CREATE DATABASE db_registro_v2;
+CREATE DATABASE db_registro;
 
-USE db_registro_v2;
+USE db_registro;
 
 create table credenziali(
 username varchar(200) primary key,
