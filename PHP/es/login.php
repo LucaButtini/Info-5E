@@ -9,8 +9,11 @@ $password_hash = password_hash("admin123", PASSWORD_DEFAULT);
 
 // INSERIMENTO UTENTI DI DEFAULT
 
+
+
 // Personale
 $stmt = $db->query("SELECT COUNT(*) as count FROM personale");
+//arr assoc con chiave 'count' tornata dalla query con count(*)
 if ($stmt->fetch()['count'] == 0) {
     $users = [
         ['admin01', $password_hash],
@@ -69,34 +72,35 @@ if ($stmt->fetch()['count'] == 0) {
 }
 $stmt->closeCursor();
 
-// === LOGIN LOGICA ===
+// logica per prendere i ruoli
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $username = trim($_POST['username']);
     $password = $_POST['password'];
     $ruolo = $_POST['ruolo'];
 
-    $tabella = "";
+    $nomeTabella = "";
     switch ($ruolo) {
         case "personale":
-            $tabella = "personale";
+            $nomeTabella = "personale";
             break;
         case "insegnante":
-            $tabella = "insegnanti";
+            $nomeTabella = "insegnanti";
             break;
         case "studente":
-            $tabella = "studenti";
+            $nomeTabella = "studenti";
             break;
         case "genitore":
-            $tabella = "genitori";
+            $nomeTabella = "genitori";
             break;
         default:
             $error = "Ruolo non valido.";
     }
 
     if (!$error) {
-        $query = "SELECT id, username, password FROM $tabella WHERE username = ?";
+        //punto di domanda  un modo per indicare che un valore verrà inserito più tardi in modo sicuro
+        $query = "SELECT id, username, password FROM $nomeTabella WHERE username = ?";
         $stmt = $db->prepare($query);
-        $stmt->execute([$username]);
+        $stmt->execute([$username]);//valore che inserisco poi nella query con "?"
         $user = $stmt->fetch();
         $stmt->closeCursor();
 
