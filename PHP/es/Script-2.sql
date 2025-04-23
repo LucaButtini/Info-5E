@@ -14,8 +14,6 @@ nome varchar(100)
 );
 
 
-
-
 create table insegnanti(
 id int primary key auto_increment,
 username varchar(200),
@@ -27,6 +25,7 @@ id int primary key auto_increment,
 username varchar(200),
 foreign key (username) references credenziali(username)
 );
+
 
 
 create table genitori(
