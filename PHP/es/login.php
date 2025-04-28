@@ -1,158 +1,159 @@
 <?php
 session_start();
-require 'Config/DbConn.php';
+require 'Config/DbConn.php';    // Adatta il path se serve
 $conf = require 'Config/db_conf.php';
-$db = DbConn::getConnection($conf);
+$db   = DbConn::getConnection($conf);
 
-$error = "";
-$password_hash = password_hash("admin123", PASSWORD_DEFAULT);
-
-// INSERIMENTO UTENTI DI DEFAULT
-
-
-
-// Personale
-$stmt = $db->query("SELECT COUNT(*) as count FROM personale");
-//arr assoc con chiave 'count' tornata dalla query con count(*)
-if ($stmt->fetch()['count'] == 0) {
-    $users = [
-        ['admin01', $password_hash],
-        ['admin02', $password_hash],
-    ];
-    $insert = $db->prepare("INSERT INTO personale (username, password) VALUES (?, ?)");
-    foreach ($users as $user) {
-        $insert->execute($user);
-    }
-    $insert->closeCursor();
+// 1) INSERIMENTO DATI DI DEFAULT SE TABELLA CREDENZIALI VUOTA
+$queryCheck = "SELECT COUNT(*) as count FROM credenziali;";
+try {
+    $stmt = $db->prepare($queryCheck);
+    $stmt->execute();
+    $conta = $stmt->fetch();
+    $stmt->closeCursor();
+} catch(PDOException $e) {
+    echo 'Errore controllo credenziali: ' . $e->getMessage();
+    exit;
 }
-$stmt->closeCursor();
 
-// Insegnanti
-$stmt = $db->query("SELECT COUNT(*) as count FROM insegnanti");
-if ($stmt->fetch()['count'] == 0) {
-    $users = [
-        ['insegnante01', $password_hash],
-        ['insegnante02', $password_hash],
+if ($conta && $conta['count'] == 0) {
+    // definiamo utenti di default
+    $defaults = [
+        ['insegnante1', 'insegnanti'],
+        ['studente1',   'studenti'],
+        ['genitore1',   'genitori'],
+        ['personale1',  'personale']
     ];
-    $insert = $db->prepare("INSERT INTO insegnanti (username, password) VALUES (?, ?)");
-    foreach ($users as $user) {
-        $insert->execute($user);
+    $hashPwd = password_hash('prova', PASSWORD_DEFAULT);
+
+    foreach ($defaults as $u) {
+        list($username, $table) = $u;
+
+        // 1.a) inserisco in credenziali
+        try {
+            $qIns = "INSERT INTO credenziali(username, password) VALUES(:username, :password)";
+            $i = $db->prepare($qIns);
+            $i->bindValue(':username', $username);
+            $i->bindValue(':password', $hashPwd);
+            $i->execute();
+            $i->closeCursor();
+        } catch(PDOException $e) {
+            echo "Errore creazione credenziali per $username: " . $e->getMessage();
+            continue;
+        }
+
+        // 1.b) inserisco in persona
+        try {
+            $qIns = "INSERT INTO persona(username) VALUES(:username)";
+            $i = $db->prepare($qIns);
+            $i->bindValue(':username', $username);
+            $i->execute();
+            $idPersona = $db->lastInsertId();
+            $i->closeCursor();
+        } catch(PDOException $e) {
+            echo "Errore creazione persona per $username: " . $e->getMessage();
+            continue;
+        }
+
+        // 1.c) inserisco nel sottotipo
+        try {
+            if ($table === 'studenti') {
+                // qui presupponiamo che esistano già piano_studio.id=1 e classi.id=1
+                $qIns = "INSERT INTO studenti(id, piano_id, classe_id) VALUES(:id, 1, 1)";
+            } else {
+                $qIns = "INSERT INTO $table(id) VALUES(:id)";
+            }
+            $i = $db->prepare($qIns);
+            $i->bindValue(':id', $idPersona, PDO::PARAM_INT);
+            $i->execute();
+            $i->closeCursor();
+        } catch(PDOException $e) {
+            echo "Errore creazione $table per $username: " . $e->getMessage();
+            continue;
+        }
     }
-    $insert->closeCursor();
 }
-$stmt->closeCursor();
 
-// Studenti
-$stmt = $db->query("SELECT COUNT(*) as count FROM studenti");
-if ($stmt->fetch()['count'] == 0) {
-    $users = [
-        ['studente01', $password_hash],
-        ['studente02', $password_hash],
-    ];
-    $insert = $db->prepare("INSERT INTO studenti (username, password) VALUES (?, ?)");
-    foreach ($users as $user) {
-        $insert->execute($user);
-    }
-    $insert->closeCursor();
-}
-$stmt->closeCursor();
+// 2) GESTIONE LOGIN
+$error = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = trim($_POST['username'] ?? '');
+    $password = $_POST['password'] ?? '';
 
-// Genitori
-$stmt = $db->query("SELECT COUNT(*) as count FROM genitori");
-if ($stmt->fetch()['count'] == 0) {
-    $users = [
-        ['genitore01', $password_hash],
-        ['genitore02', $password_hash],
-    ];
-    $insert = $db->prepare("INSERT INTO genitori (username, password) VALUES (?, ?)");
-    foreach ($users as $user) {
-        $insert->execute($user);
-    }
-    $insert->closeCursor();
-}
-$stmt->closeCursor();
-
-// logica per prendere i ruoli
-if ($_SERVER['REQUEST_METHOD'] === "POST") {
-    $username = trim($_POST['username']);
-    $password = $_POST['password'];
-    $ruolo = $_POST['ruolo'];
-
-    $nomeTabella = "";
-    switch ($ruolo) {
-        case "personale":
-            $nomeTabella = "personale";
-            break;
-        case "insegnante":
-            $nomeTabella = "insegnanti";
-            break;
-        case "studente":
-            $nomeTabella = "studenti";
-            break;
-        case "genitore":
-            $nomeTabella = "genitori";
-            break;
-        default:
-            $error = "Ruolo non valido.";
-    }
-
-    if (!$error) {
-        //punto di domanda  un modo per indicare che un valore verrà inserito più tardi in modo sicuro
-        $query = "SELECT id, username, password FROM $nomeTabella WHERE username = ?";
-        $stmt = $db->prepare($query);
-        $stmt->execute([$username]);//valore che inserisco poi nella query con "?"
-        $user = $stmt->fetch();
+    if ($username === '' || $password === '') {
+        $error = 'Compila entrambi i campi.';
+    } else {
+        // verifica credenziali
+        $sql = "SELECT c.password, p.id
+                FROM credenziali c
+                JOIN persona p ON p.username = c.username
+                WHERE c.username = :username";
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':username', $username);
+        $stmt->execute();
+        $row = $stmt->fetch();
         $stmt->closeCursor();
 
-        if ($user && password_verify($password, $user['password'])) {
-            $_SESSION['username'] = $user['username'];
-            $_SESSION['ruolo'] = $ruolo;
-            header("Location: action.php");
-            exit();
+        if ($row && password_verify($password, $row['password'])) {
+            // scopro il ruolo
+            $sqlR = "
+                SELECT CASE
+                    WHEN EXISTS(SELECT 1 FROM insegnanti WHERE id = :id) THEN 'insegnante'
+                    WHEN EXISTS(SELECT 1 FROM studenti   WHERE id = :id) THEN 'studente'
+                    WHEN EXISTS(SELECT 1 FROM genitori   WHERE id = :id) THEN 'genitore'
+                    WHEN EXISTS(SELECT 1 FROM personale  WHERE id = :id) THEN 'personale'
+                    ELSE 'sconosciuto'
+                END AS ruolo";
+            $r = $db->prepare($sqlR);
+            $r->bindValue(':id', $row['id'], PDO::PARAM_INT);
+            $r->execute();
+            $ruolo = $r->fetchColumn();
+            $r->closeCursor();
+
+            $_SESSION['username'] = $username;
+            $_SESSION['ruolo']    = $ruolo;
+
+            switch ($ruolo) {
+                case 'insegnante':
+                    header('Location: dashboard_insegnante.php');  exit;
+                case 'studente':
+                    header('Location: dashboard_studente.php');    exit;
+                case 'genitore':
+                    header('Location: dashboard_genitore.php');    exit;
+                case 'personale':
+                    header('Location: dashboard_personale.php');   exit;
+                default:
+                    $error = 'Ruolo non riconosciuto.';
+            }
         } else {
-            $error = "Credenziali non valide.";
+            $error = 'Username o password errati.';
         }
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Login - Registro</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Login Registro</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 2em; }
+        form { max-width: 300px; margin: auto; }
+        .error { color: red; margin-bottom: 1em; }
+    </style>
 </head>
 <body>
-<div class="container mt-5">
-    <h1 class="text-center mb-4">Login - Registro Elettronico</h1>
-
-    <?php if ($error){ ?>
-        <div class="alert alert-danger text-center"><?= $error ?></div>
-    <?php } ?>
-
-    <form action="login.php" method="post" class="w-50 mx-auto">
-        <div class="mb-3">
-            <label for="ruolo" class="form-label">Ruolo:</label>
-            <select name="ruolo" id="ruolo" class="form-select" required>
-                <option value="">-- Seleziona --</option>
-                <option value="personale">Personale</option>
-                <option value="insegnante">Insegnante</option>
-                <option value="studente">Studente</option>
-                <option value="genitore">Genitore</option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label for="username" class="form-label">Username:</label>
-            <input type="text" name="username" id="username" class="form-control" required>
-        </div>
-        <div class="mb-3">
-            <label for="password" class="form-label">Password:</label>
-            <input type="password" name="password" id="password" class="form-control" required>
-        </div>
-        <button type="submit" class="btn btn-primary w-100">Accedi</button>
-    </form>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<h1>Accedi al Registro</h1>
+<?php if ($error): ?>
+    <div class="error"><?= $error ?></div>
+<?php endif; ?>
+<form action="login.php" method="post">
+    <label>Username:</label><br>
+    <input type="text" name="username" required
+           value="<?= ['username'] ?? '' ?>"><br><br>
+    <label>Password:</label><br>
+    <input type="password" name="password" required><br><br>
+    <button type="submit">Accedi</button>
+</form>
 </body>
 </html>
